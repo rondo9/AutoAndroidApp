@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    >
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Front sensors"
+            android:id="@+id/textView2"
+            android:layout_row="0"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="217dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="     Top Left"
+            android:id="@+id/textView3"
+            android:layout_row="1"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="00.00"
+            android:id="@+id/textView4"
+            android:layout_row="1"
+            android:layout_column="2" />
+
+        <TextView
+            android:layout_width="217dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="     Top Mid"
+            android:id="@+id/textView5"
+            android:layout_row="2"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="00.00"
+            android:id="@+id/textView7"
+            android:layout_row="2"
+            android:layout_column="2" />
+
+        <TextView
+            android:layout_width="217dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="     Top Right"
+            android:id="@+id/textView6"
+            android:layout_row="3"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="00.00"
+            android:id="@+id/textView8"
+            android:layout_row="3"
+            android:layout_column="2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/textView9"
+            android:layout_row="4"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Mid sensors"
+            android:id="@+id/textView10"
+            android:layout_row="5"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="217dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="     Mid left"
+            android:id="@+id/textView11"
+            android:layout_row="6"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="00.00"
+            android:id="@+id/textView13"
+            android:layout_row="6"
+            android:layout_column="2" />
+
+        <TextView
+            android:layout_width="217dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="     Mid right"
+            android:id="@+id/textView12"
+            android:layout_row="7"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="00.00"
+            android:id="@+id/textView14"
+            android:layout_row="7"
+            android:layout_column="2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/textView15"
+            android:layout_row="8"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Bottom sensors"
+            android:id="@+id/textView16"
+            android:layout_row="9"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="217dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="     Bottom left"
+            android:id="@+id/textView17"
+            android:layout_row="10"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="00.00"
+            android:id="@+id/textView20"
+            android:layout_row="10"
+            android:layout_column="2" />
+
+        <TextView
+            android:layout_width="217dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="     Bottom mid"
+            android:id="@+id/textView18"
+            android:layout_row="11"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="00.00"
+            android:id="@+id/textView21"
+            android:layout_row="11"
+            android:layout_column="2" />
+
+        <TextView
+            android:layout_width="217dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="     Bottom right"
+            android:id="@+id/textView19"
+            android:layout_row="12"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="00.00"
+            android:id="@+id/textView22"
+            android:layout_row="12"
+            android:layout_column="2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/textView23"
+            android:layout_row="13"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Connection"
+            android:id="@+id/textView24"
+            android:layout_row="14"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="217dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="     Status"
+            android:id="@+id/textView25"
+            android:layout_row="15"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="ON"
+            android:id="@+id/textView26"
+            android:layout_row="15"
+            android:layout_column="2"
+            android:textAlignment="textEnd" />
+
+    </GridLayout>
+
+</RelativeLayout><!-- From: file:/D:/TUM/M3_WS15/Autonomous%20Driving/AutoAndroidApp/app/src/main/res/layout/content_diagnosis.xml -->
