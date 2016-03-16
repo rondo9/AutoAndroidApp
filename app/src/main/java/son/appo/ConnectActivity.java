@@ -1,7 +1,11 @@
 package son.appo;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,11 +16,15 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import services.HotspotService;
+
 public class ConnectActivity extends AppCompatActivity {
     final String defaultHotspotName = "android.hotspot.default.name";
     final String defaultHotspotPW = "default.password";
     final int defaultHotspotP1 = 8080;
     final int defaultHotspotP2 = 8080;
+    boolean mBound;
+    HotspotService hotspotService;
 
     //for the drawer
     private String[] mPlanetTitles;
@@ -27,7 +35,8 @@ public class ConnectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connect);
-
+        Intent intent = new Intent(this, HotspotService.class);
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
         //here comes the drawer stuff
         mPlanetTitles = getResources().getStringArray(R.array.draweritems_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -55,6 +64,7 @@ public class ConnectActivity extends AppCompatActivity {
                 Toast.makeText(getApplication().getBaseContext(), "Connected", Toast.LENGTH_SHORT).show();
                 Intent myIntent = new Intent(ConnectActivity.this, CommandActivity.class);
                 myIntent.putExtra("key", new String("")); //Optional parameters
+                hotspotService.startHotspot();
                 ConnectActivity.this.startActivity(myIntent);
             }
         });
@@ -73,6 +83,7 @@ public class ConnectActivity extends AppCompatActivity {
             }
         });
     }
+
 
 
 
@@ -108,4 +119,21 @@ public class ConnectActivity extends AppCompatActivity {
         setTitle(mPlanetTitles[position]);
         mDrawerLayout.closeDrawer(mDrawerList);
     }
+    private ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className,
+                                       IBinder service) {
+            // We've bound to LocalService, cast the IBinder and get LocalService instance
+            HotspotService.LocalBinder binder = (HotspotService.LocalBinder) service;
+            hotspotService = binder.getService();
+            mBound = true;
+        }
+        @Override
+        // Called when the connection with the service disconnects unexpectedly
+        public void onServiceDisconnected(ComponentName arg0) {
+            mBound = false;
+        }
+
+    };
 }
