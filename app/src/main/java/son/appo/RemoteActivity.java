@@ -29,6 +29,31 @@ public class RemoteActivity extends AppCompatActivity implements SensorEventList
     private Button rechts;
     private Button switchMode;
     private int switchCount;
+    // Service 
+    boolean mBound;//tells if a Service is bound the activity
+    HotspotService hotspotService;
+    
+    /**
+     * Service Connection is doing the actual binding
+     * 
+     */
+    private ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className,
+                                       IBinder service) {
+            // We've bound to HotspotService, cast the IBinder and get HotspotService instance
+            HotspotService.LocalBinder binder = (HotspotService.LocalBinder) service;
+            hotspotService = binder.getService();
+            mBound = true;
+        }
+        @Override
+        // Called when the connection with the service disconnects unexpectedly
+        public void onServiceDisconnected(ComponentName arg0) {
+            mBound = false;
+        }
+
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +109,23 @@ public class RemoteActivity extends AppCompatActivity implements SensorEventList
                 updateButtons();
             }
         });
+    }
+     @Override
+    protected void onStart() {
+        super.onStart();
+       // binding the Service to the activity
+        Intent intent = new Intent(this, HotspotService.class);
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // Unbind from the service
+        if (mBound) {
+            unbindService(mConnection);
+            mBound = false;
+        }
     }
 
     //Erstmal das Sensor-Zeug
@@ -147,16 +189,25 @@ public class RemoteActivity extends AppCompatActivity implements SensorEventList
             geradeaus.setBackgroundColor(Color.LTGRAY);
             rechts.setBackgroundColor(Color.GREEN);
             links.setBackgroundColor(Color.LTGRAY);
+            // sending the new direction to the car
+             byte direction = 0x33;
+            hotspotService.sendDirection(direction);
         }
         if(direction==1){
             geradeaus.setBackgroundColor(Color.GREEN);
             rechts.setBackgroundColor(Color.LTGRAY);
             links.setBackgroundColor(Color.LTGRAY);
+            // sending the new directions to the car
+            byte direction = 0x32;
+            hotspotService.sendDirection(direction);
         }
         if(direction==2){
             geradeaus.setBackgroundColor(Color.LTGRAY);
             links.setBackgroundColor(Color.GREEN);
             rechts.setBackgroundColor(Color.LTGRAY);
+            //sending the new direction to the car
+            byte direction = 0x31;
+            hotspotService.sendDirection(direction);
         }
     }
 
