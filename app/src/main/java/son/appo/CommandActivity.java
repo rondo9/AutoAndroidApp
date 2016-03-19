@@ -1,10 +1,14 @@
 package son.appo;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +20,9 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import services.HotspotService;
+//ToDO hotspotSrevice.sendInstructions[instructions] und instructions = byte Array
+//instructions use  0x00 = turn left, 0x01 = go straight, 0x02 = turn right, park = 0x03, stop = 0x04
 public class CommandActivity extends AppCompatActivity {
 
     String[] strings = {"STRAIGHT","LEFT", "RIGHT", "STOP"};
@@ -28,6 +35,30 @@ public class CommandActivity extends AppCompatActivity {
     private String[] mPlanetTitles;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
+
+    //for the Service
+
+    boolean mBound;
+    HotspotService hotspotService;
+    private ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className,
+                                       IBinder service) {
+            // We've bound to LocalService, cast the IBinder and get LocalService instance
+            HotspotService.LocalBinder binder = (HotspotService.LocalBinder) service;
+            hotspotService = binder.getService();
+            mBound = true;
+            Log.i("ShowActivity", "OnServiceConnected");
+
+        }
+        @Override
+        // Called when the connection with the service disconnects unexpectedly
+        public void onServiceDisconnected(ComponentName arg0) {
+            mBound = false;
+        }
+
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +101,26 @@ public class CommandActivity extends AppCompatActivity {
         mySpinner3.setAdapter(new MyAdapter(CommandActivity.this, R.layout.row, strings));
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i("CommandActivity", "start Service was called");
+        // binding the Service to the activity
+        Intent intent = new Intent(this, HotspotService.class);
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+        Log.i("Command Activity", "unbindService");
+    }
+    @Override
+    protected void onStop() {
+        // Unbind from the service
+        if (mBound) {
+            unbindService(mConnection);
+            mBound = false;
+            Log.i("CommandActivity", "unbindService");
+        }
+
+        super.onStop();
+    }
 
     public class MyAdapter extends ArrayAdapter<String> {
 

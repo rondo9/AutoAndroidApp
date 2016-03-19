@@ -27,6 +27,7 @@ import android.widget.Toast;
 import services.HotspotService;
 // Son du kannst jetzt die einzelen Sensoren mit getter Methoden holen
 //Das geht einfach durch hotspotService.getSensorBottomLeft(); für den Sensor unten Links
+// hotspoService.getCurrenInstruction funktioniert jetzt 0x00 = turn left, 0x01 = go straight, 0x02 = turn right, park = 0x03, stop = 0x04
 // aktuell bekommst du immer 2.5 für jeden Sensor aber wenn die App zu meiner VirtualCAr verbunden ist kommen andere Werte
 public class ShowActivity extends AppCompatActivity {
 

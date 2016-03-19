@@ -1,25 +1,41 @@
 package son.appo;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.IBinder;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+
+import services.HotspotService;
 
 public class RemoteActivity extends AppCompatActivity implements SensorEventListener {
     //Die sind für den Drawer
     private String[] mPlanetTitles;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
+
 
     //Das ist die Remote Control
     private SensorManager sensorManager;
@@ -29,22 +45,26 @@ public class RemoteActivity extends AppCompatActivity implements SensorEventList
     private Button rechts;
     private Button switchMode;
     private int switchCount;
-    // Service 
-    boolean mBound;//tells if a Service is bound the activity
+    private int port = 33334;
+    private InetAddress ip;
+
+
+    private TextView showip;
+    // for the service
+    boolean mBound;
     HotspotService hotspotService;
-    
-    /**
-     * Service Connection is doing the actual binding
-     * 
-     */
     private ServiceConnection mConnection = new ServiceConnection() {
 
         @Override
         public void onServiceConnected(ComponentName className,
                                        IBinder service) {
-            // We've bound to HotspotService, cast the IBinder and get HotspotService instance
+            // We've bound to LocalService, cast the IBinder and get LocalService instance
             HotspotService.LocalBinder binder = (HotspotService.LocalBinder) service;
             hotspotService = binder.getService();
+            // This Thread is necessary for a short break. You need the break to prevent that this activity
+            // starts a Receiving or Requesting while another activity is calling stopReceiving because onStart ans Onstop
+            // is always called new activity calls onStart then old calls OnStop
+
             mBound = true;
         }
         @Override
@@ -54,11 +74,11 @@ public class RemoteActivity extends AppCompatActivity implements SensorEventList
         }
 
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remote);
-
         //Erstmal das Drawer-Zeug
         mPlanetTitles = getResources().getStringArray(R.array.draweritems_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -84,6 +104,9 @@ public class RemoteActivity extends AppCompatActivity implements SensorEventList
                 } else onResume();
                 //Zähler zum umschalten
                 switchCount++;
+                showip= (TextView)findViewById(R.id.textView27);
+                showip.setText(hotspotService.getTest());
+
             }
         });
 
@@ -109,13 +132,15 @@ public class RemoteActivity extends AppCompatActivity implements SensorEventList
                 updateButtons();
             }
         });
-    }
-     @Override
+       }
+    @Override
     protected void onStart() {
         super.onStart();
-       // binding the Service to the activity
+        // binding the Service to the activity
         Intent intent = new Intent(this, HotspotService.class);
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+
+
     }
 
     @Override
@@ -125,8 +150,12 @@ public class RemoteActivity extends AppCompatActivity implements SensorEventList
         if (mBound) {
             unbindService(mConnection);
             mBound = false;
+            Log.i("Remote activiy", "unbindService");
         }
     }
+
+        //zeigt zu Testzwecken die IP des verbundenen Geräts
+
 
     //Erstmal das Sensor-Zeug
     public void onSensorChanged(SensorEvent event) {
@@ -168,6 +197,7 @@ public class RemoteActivity extends AppCompatActivity implements SensorEventList
     @Override
     protected void onResume() {
         super.onResume();
+
         // register this class as a listener for the orientation and
         // accelerometer sensors
         sensorManager.registerListener(this,
@@ -180,36 +210,39 @@ public class RemoteActivity extends AppCompatActivity implements SensorEventList
         // unregister listener
         super.onPause();
         sensorManager.unregisterListener(this);
+
     }
+
 
 
     //updatet die Buttons, die die aktuelle Richtung anzeigen. Der ausgewählte wird grün, die anderen grau
     private void updateButtons(){
+        if(mBound){
         if(direction==0){
             geradeaus.setBackgroundColor(Color.LTGRAY);
             rechts.setBackgroundColor(Color.GREEN);
             links.setBackgroundColor(Color.LTGRAY);
-            // sending the new direction to the car
-             byte direction = 0x33;
+            byte direction = 0x33;
             hotspotService.sendDirection(direction);
         }
         if(direction==1){
             geradeaus.setBackgroundColor(Color.GREEN);
             rechts.setBackgroundColor(Color.LTGRAY);
             links.setBackgroundColor(Color.LTGRAY);
-            // sending the new directions to the car
             byte direction = 0x32;
             hotspotService.sendDirection(direction);
+
+            //hotspotService.sendRandomnumbers();
         }
         if(direction==2){
             geradeaus.setBackgroundColor(Color.LTGRAY);
             links.setBackgroundColor(Color.GREEN);
             rechts.setBackgroundColor(Color.LTGRAY);
-            //sending the new direction to the car
             byte direction = 0x31;
             hotspotService.sendDirection(direction);
         }
-    }
+    }}
+
 
 
 
