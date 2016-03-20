@@ -19,17 +19,22 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import services.HotspotService;
-//ToDO hotspotSrevice.sendInstructions[instructions] und instructions = byte Array
+
+//ToDO hotspotService.sendInstructions[instructions] und instructions = byte Array
 //instructions use  0x00 = turn left, 0x01 = go straight, 0x02 = turn right, park = 0x03, stop = 0x04
 public class CommandActivity extends AppCompatActivity {
 
-    String[] strings = {"STRAIGHT","LEFT", "RIGHT", "STOP"};
+    String[] strings = {"STRAIGHT", "LEFT", "RIGHT", "STOP", "PARK"};
 
-    String[] subs = {"Go straight next", "Turn left next", "Turn right next", "Stop next"};
+    String[] subs = {"Go straight next", "Turn left next", "Turn right next", "Stop next", "Park vehicle"};
 
-    int arr_images[] = {R.drawable.straight_sign, R.drawable.left_sign, R.drawable.right_sign, R.drawable.stop_sign};
+    int arr_images[] = {R.drawable.straight_sign, R.drawable.left_sign, R.drawable.right_sign, R.drawable.stop_sign, R.drawable.park_sign};
+
+    byte[] instruction_bytes = {0x01, 0x00, 0x02, 0x04, 0x03};
+    byte[] instructions = null;
 
     //for the drawer
     private String[] mPlanetTitles;
@@ -41,7 +46,6 @@ public class CommandActivity extends AppCompatActivity {
     boolean mBound;
     HotspotService hotspotService;
     private ServiceConnection mConnection = new ServiceConnection() {
-
         @Override
         public void onServiceConnected(ComponentName className,
                                        IBinder service) {
@@ -50,14 +54,13 @@ public class CommandActivity extends AppCompatActivity {
             hotspotService = binder.getService();
             mBound = true;
             Log.i("ShowActivity", "OnServiceConnected");
-
         }
+
         @Override
         // Called when the connection with the service disconnects unexpectedly
         public void onServiceDisconnected(ComponentName arg0) {
             mBound = false;
         }
-
     };
 
     @Override
@@ -82,9 +85,17 @@ public class CommandActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(getApplication().getBaseContext(), "Connected", Toast.LENGTH_SHORT).show();
-                Intent myIntent = new Intent(CommandActivity.this, ShowActivity.class);
-                myIntent.putExtra("key", new String("")); //Optional parameters
-                CommandActivity.this.startActivity(myIntent);
+
+                // send instructions to HotspotService
+                if (instructions == null) {
+                    Toast.makeText(getApplication().getBaseContext(), "Please select commands", Toast.LENGTH_SHORT).show();
+                } else {
+                    hotspotService.sendInstructions(instructions);
+
+                    Intent myIntent = new Intent(CommandActivity.this, ShowActivity.class);
+                    myIntent.putExtra("key", new String("")); //Optional parameters
+                    CommandActivity.this.startActivity(myIntent);
+                }
             }
         });
 
@@ -99,6 +110,14 @@ public class CommandActivity extends AppCompatActivity {
 
         Spinner mySpinner3 = (Spinner) findViewById(R.id.spinner3);
         mySpinner3.setAdapter(new MyAdapter(CommandActivity.this, R.layout.row, strings));
+
+        // build instructions to send to HotspotService
+        instructions = new byte[4];
+        instructions[0] = instruction_bytes[mySpinner0.getSelectedItemPosition()];
+        instructions[1] = instruction_bytes[mySpinner1.getSelectedItemPosition()];
+        instructions[2] = instruction_bytes[mySpinner2.getSelectedItemPosition()];
+        instructions[3] = instruction_bytes[mySpinner3.getSelectedItemPosition()];
+
     }
 
     @Override
@@ -110,6 +129,7 @@ public class CommandActivity extends AppCompatActivity {
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
         Log.i("Command Activity", "unbindService");
     }
+
     @Override
     protected void onStop() {
         // Unbind from the service
@@ -124,12 +144,12 @@ public class CommandActivity extends AppCompatActivity {
 
     public class MyAdapter extends ArrayAdapter<String> {
 
-        public MyAdapter(Context context, int textViewResourceId,   String[] objects) {
+        public MyAdapter(Context context, int textViewResourceId, String[] objects) {
             super(context, textViewResourceId, objects);
         }
 
         @Override
-        public View getDropDownView(int position, View convertView,ViewGroup parent) {
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
             return getCustomDropDownView(position, convertView, parent);
         }
 
@@ -140,15 +160,15 @@ public class CommandActivity extends AppCompatActivity {
 
         public View getCustomView(int position, View convertView, ViewGroup parent) {
 
-            LayoutInflater inflater=getLayoutInflater();
-            View row=inflater.inflate(R.layout.row, parent, false);
-            TextView label=(TextView)row.findViewById(R.id.direction);
+            LayoutInflater inflater = getLayoutInflater();
+            View row = inflater.inflate(R.layout.row, parent, false);
+            TextView label = (TextView) row.findViewById(R.id.direction);
             label.setText(strings[position]);
 
-            TextView sub=(TextView)row.findViewById(R.id.sub);
+            TextView sub = (TextView) row.findViewById(R.id.sub);
             sub.setText(subs[position]);
 
-            ImageView icon=(ImageView)row.findViewById(R.id.image);
+            ImageView icon = (ImageView) row.findViewById(R.id.image);
             icon.setImageResource(arr_images[position]);
 
             return row;
@@ -156,15 +176,15 @@ public class CommandActivity extends AppCompatActivity {
 
         public View getCustomDropDownView(int position, View convertView, ViewGroup parent) {
 
-            LayoutInflater inflater=getLayoutInflater();
-            View row=inflater.inflate(R.layout.row, parent, false);
-            TextView label=(TextView)row.findViewById(R.id.direction);
+            LayoutInflater inflater = getLayoutInflater();
+            View row = inflater.inflate(R.layout.row, parent, false);
+            TextView label = (TextView) row.findViewById(R.id.direction);
             label.setText(strings[position]);
 
-            TextView sub=(TextView)row.findViewById(R.id.sub);
+            TextView sub = (TextView) row.findViewById(R.id.sub);
             sub.setText(subs[position]);
 
-            ImageView icon=(ImageView)row.findViewById(R.id.image);
+            ImageView icon = (ImageView) row.findViewById(R.id.image);
             icon.setImageResource(arr_images[position]);
 
             return row;
@@ -173,30 +193,35 @@ public class CommandActivity extends AppCompatActivity {
 
 
     //onclicklistener for the drawer
-
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             selectItem(position);
         }
     }
+
     private void selectItem(int position) {
         //what happens when item is selected
-        if(position==0){
-            Intent myIntent= new Intent(this, ConnectActivity.class);
-            startActivity(myIntent);}
-        if(position==1){
-            Intent myIntent= new Intent(this, ShowActivity.class);
-            startActivity(myIntent);}
-        if(position==2){
-            Intent myIntent= new Intent(this, DiagnosisActivity.class);
-            startActivity(myIntent);}
-        if(position==3){
-            Intent myIntent= new Intent(this, RemoteActivity.class);
-            startActivity(myIntent);}
-        if(position==4){
-            Intent myIntent= new Intent(this, CommandActivity.class);
-            startActivity(myIntent);}
+        if (position == 0) {
+            Intent myIntent = new Intent(this, ConnectActivity.class);
+            startActivity(myIntent);
+        }
+        if (position == 1) {
+            Intent myIntent = new Intent(this, ShowActivity.class);
+            startActivity(myIntent);
+        }
+        if (position == 2) {
+            Intent myIntent = new Intent(this, DiagnosisActivity.class);
+            startActivity(myIntent);
+        }
+        if (position == 3) {
+            Intent myIntent = new Intent(this, RemoteActivity.class);
+            startActivity(myIntent);
+        }
+        if (position == 4) {
+            Intent myIntent = new Intent(this, CommandActivity.class);
+            startActivity(myIntent);
+        }
 
         // update selected item and title, then close the drawer
         mDrawerList.setItemChecked(position, true);
