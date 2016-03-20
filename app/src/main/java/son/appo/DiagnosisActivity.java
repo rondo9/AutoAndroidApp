@@ -4,33 +4,43 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import services.HotspotService;
 
-// Son du kannst jetzt die einzelen Sensoren mit getter Methoden holen
-//Das geht einfach durch hotspotService.getSensorBottomLeft(); für den Sensor unten Links
-// hotspoService.getCurrenInstruction funktioniert jetzt 0x00 = turn left, 0x01 = go straight, 0x02 = turn right, park = 0x03, stop = 0x04
-// aktuell bekommst du immer 2.5 für jeden Sensor aber wenn die App zu meiner VirtualCAr verbunden ist kommen andere Werte
+/*
+Sensor data can be invoked by calling eg. hotspotService.getSensorBottomLeft() for the sensor bottom left
+
+hotspoService.getCurrenInstruction() returns
+    0x00 = turn left
+    0x01 = go straight
+    0x02 = turn right
+    0x03 = park
+    0x04 = stop
+*/
+
 public class DiagnosisActivity extends AppCompatActivity {
 
-    //for the drawer
+    // for the drawer
     private String[] mPlanetTitles;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
 
-    boolean mBound;//shows if the service is bound to a activity
-    HotspotService hotspotService;// thhis Handels the connection
+    boolean mBound; // shows if the service is bound to a activity
+    HotspotService hotspotService; // this handles the connection
+
+    private Handler myRepeatHandler; // used to repeat after a delay
+
     /**
      * Does the actual binding of the Service
      */
@@ -75,7 +85,7 @@ public class DiagnosisActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diagnosis);
 
-        //here comes the drawer stuff
+        // The drawer stuff
         mPlanetTitles = getResources().getStringArray(R.array.draweritems_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -85,23 +95,64 @@ public class DiagnosisActivity extends AppCompatActivity {
                 R.layout.drawer_list_item, mPlanetTitles));
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-        //finished with drawer stuff
+        // Finished with drawer stuff
 
+        // Update sensor data repeatedly
+        myRepeatHandler = new Handler();
+        updateSensors();
+        startRepeatRandom();
     }
+
+    // Update function for sensors, this will be called repeatedly EVERY 1000ms
+    private void updateSensors(){
+        TextView valTopLeft = (TextView) findViewById(R.id.valTopLeft);
+        valTopLeft.setText(hotspotService.getSensorTopLeft() + "");
+        TextView valTopMid = (TextView) findViewById(R.id.valTopMid);
+        valTopMid.setText(hotspotService.getSensorTopMiddle() + "");
+        TextView valTopRight = (TextView) findViewById(R.id.valTopRight);
+        valTopRight.setText(hotspotService.getSensorTopRight() + "");
+        TextView valMidLeft = (TextView) findViewById(R.id.valMidLeft);
+        valMidLeft.setText(hotspotService.getSensorMiddleLeft() + "");
+        TextView valMidRight = (TextView) findViewById(R.id.valMidRight);
+        valMidRight.setText(hotspotService.getSensorMiddleRight() + "");
+        TextView valBotLeft = (TextView) findViewById(R.id.valBotLeft);
+        valBotLeft.setText(hotspotService.getSensorBottomLeft() + "");
+        TextView valBotMid = (TextView) findViewById(R.id.valBotMid);
+        valBotMid.setText(hotspotService.getSensorBottomMiddle() + "");
+        TextView valBotRight = (TextView) findViewById(R.id.valBotRight);
+        valBotRight.setText(hotspotService.getSensorBottomRight() + "");
+    }
+
+    // These following 3 functions repeat/stop the process of updating sensors
+    Runnable myStatus = new Runnable() {
+        @Override
+        public void run() {
+            updateSensors();
+            //new MyAsyncTask().execute();
+            myRepeatHandler.postDelayed(myStatus, 1000);
+        }
+    };
+    void startRepeatRandom() {
+        myStatus.run();
+    }
+    void stopRepeatingTask() {
+        myRepeatHandler.removeCallbacks(myStatus);
+    }
+    // end of repeating functions
+
     @Override
     protected void onStart() {
         super.onStart();
         Log.i("DiagnosisActivity", "start Service was called");
-        // binding the Service to the activity
+        // Binding the Service to the activity
         Intent intent = new Intent(this, HotspotService.class);
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
         if(mBound){
-            // start the to receive and request data form the car
+            // Start the to receive and request data form the car
             hotspotService.startRequest();
             hotspotService.startReceive();
             Log.i("DiagnosisActivity\"", "bindService");
         }
-
     }
 
     @Override
@@ -119,8 +170,7 @@ public class DiagnosisActivity extends AppCompatActivity {
     }
 
 
-    //onclicklistener for the drawer
-
+    // OnClick Listener for the drawer
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -128,7 +178,7 @@ public class DiagnosisActivity extends AppCompatActivity {
         }
     }
     private void selectItem(int position) {
-        //what happens when item is selected
+        // What happens when item is selected
         if(position==0){
             Intent myIntent= new Intent(this, ConnectActivity.class);
             startActivity(myIntent);}
@@ -145,7 +195,7 @@ public class DiagnosisActivity extends AppCompatActivity {
             Intent myIntent= new Intent(this, CommandActivity.class);
             startActivity(myIntent);}
 
-        // update selected item and title, then close the drawer
+        // Update selected item and title, then close the drawer
         mDrawerList.setItemChecked(position, true);
         setTitle(mPlanetTitles[position]);
         mDrawerLayout.closeDrawer(mDrawerList);

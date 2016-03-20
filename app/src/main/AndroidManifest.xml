@@ -13,39 +13,37 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
+
         <activity android:name=".ShowActivity" >
-
-            <!--
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            -->
         </activity>
+
         <activity
             android:name=".ConnectActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".DiagnosisActivity" >
         </activity>
+
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
+
         <activity
             android:name=".CommandActivity"
             android:label="@string/title_activity_command"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+
         <activity android:name=".RemoteActivity" >
         </activity>
+
     </application>
 
 </manifest>
