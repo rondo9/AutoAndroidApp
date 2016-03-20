@@ -3,21 +3,20 @@ package services;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
+import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
+import son.appo.ConnectActivity;
 import wifihotspotutils.ClientScanResult;
 import wifihotspotutils.FinishScanListener;
 import wifihotspotutils.WifiApManager;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -40,7 +39,7 @@ public class HotspotService extends Service {
     private final byte ID_Request_CurrentInstruction = 0x05;
 
     // Data for the acitivites
-    private byte currentInstruction;
+    private byte currentInstruction =0x01;
     private double[] currentSensors = new double []{2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5};
     //Data for the service itself
     private boolean hotspotStarted = false;
@@ -57,6 +56,49 @@ public class HotspotService extends Service {
     boolean request = false;
     private final Semaphore send_sem = new Semaphore(1, true);
     private final Semaphore sem_sensor = new Semaphore(1, true);
+    private long start_Receive;
+    private long end_Receive;
+
+    DatagramSocket receiver;
+    /**
+     * This method is used in the CommandActivity. It is used to send the array of instructions to the car
+     *   0x00 = turn left, 0x01 = go straight, 0x02 = turn right, park = 0x03, stop = 0x04
+     */
+    public byte getCurrentInstruction(){
+        return currentInstruction;
+    }
+    public double[] getSensors(){
+        return currentSensors;
+    }
+    public String getTest(){
+        return ""+currentSensors[0]+currentSensors[1]
+                +currentSensors[2]+currentSensors[3]+currentSensors[4]+currentSensors[5]+currentSensors[6]+currentSensors[7];
+    }
+    public double getSensorTopLeft(){
+        return currentSensors[0];
+    }
+    public double getSensorTopMiddle(){
+        return currentSensors[1];
+    }
+    public double getSensorTopRight(){
+        return currentSensors[2];
+    }
+    public double getSensorMiddleRight(){
+        return currentSensors[3];
+    }
+    public double getSensorBottomRight(){
+        return currentSensors[4];
+    }
+    public double getSensorBottomMiddle(){
+        return currentSensors[5];
+    }
+    public double getSensorBottomLeft(){
+        return currentSensors[6];
+    }
+    public double getSensorMiddleLeft(){
+        return currentSensors[7];
+    }
+
 
     @Override
     public void onCreate() {
@@ -95,19 +137,23 @@ public class HotspotService extends Service {
             public void onFinishScan(final ArrayList<ClientScanResult> clients) {
                 for (ClientScanResult clientScanResult : clients) {
                     ipAdress = clientScanResult.getIpAddr();
-                    if(ipAdress!=null){
-                        ipSet=true;
-                    }
+
                 }
             }
         });}
+        if(ipAdress!=null&ipAdress!="Error"){
+            ipSet=true;
+        }
+        else{
+            ipAdress="Error";
+        }
     return ipAdress;}
 
     public void startReceive(){
         if(receive!=true){
             receive=true;
-            Thread connection = new Thread( new Recieving());
-            connection.start();
+           Thread Receiveconnection = new Thread( new Recieving());
+            Receiveconnection.start();
         }
     }
     public void startRequest(){
@@ -117,22 +163,15 @@ public class HotspotService extends Service {
             requester.start();
         }
     }
+
     public void quitReceive(){
         receive= false;
+        receiver.close();
     }
     public void quitRequest(){
         request= false;
     }
-    public byte getCurrentInstruction(){
-        return currentInstruction;
-    }
-    public double[] getSensors(){
-        return currentSensors;
-    }
-    public String getTest(){
-        return ""+currentSensors[0]+currentSensors[1]
-                +currentSensors[2]+currentSensors[3]+currentSensors[4]+currentSensors[5]+currentSensors[6]+currentSensors[7];
-    }
+
     /**
      * This Method is used in the Remotecontrol to send the directions.
      * @param direction use 0 for left, 50 for straight, 51 for right
@@ -204,7 +243,7 @@ public class HotspotService extends Service {
      public void run(){
          byte []message = msg;
          // getIp() must be called to set the IpAdress
-         if(getIp()!=null){
+         if(getIp()!="Error"){
          try {
              ip = InetAddress.getByName(ipAdress);
          } catch (UnknownHostException e) {
@@ -228,8 +267,11 @@ public class HotspotService extends Service {
      }
  }
 
+    /**
+     * This class handels completley the Receiving of the Messages.
+     */
     class Recieving implements Runnable{
-        DatagramSocket receiver;
+
         public Recieving (){
             super();
             try {
@@ -248,17 +290,51 @@ public class HotspotService extends Service {
                 DatagramPacket packet = new DatagramPacket(data,
                         data.length);
                 try {
+                    start_Receive =System.nanoTime();
+                    // The Thread check time compares the Time when the service was started
+                    Thread checkTime = new Thread(new Runnable(){
+                         long tooLong = 5000000000L;// if the service hasn't received an answer for 5 seconds
+                        @Override
+                        public void run() {
+                        while(receive){
+                            if(System.nanoTime()-start_Receive>tooLong){
+                                // Handler is required because sending a Toast is a foreground action and Services have no access to UI
+                                Handler h = new Handler(getApplicationContext().getMainLooper());
+                                // This has to be Thread because the Handler works only with threads
+                                h.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        // informs the User
+                                        Toast.makeText(getApplicationContext(),"Lost Connection connect again",Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                                break;
+                            }
+                        }
+                        }
+                    });
+                    // start taking the timme
+                    checkTime.start();
                     receiver.receive(packet);
+                    // if the programm reached this point. It received a message! Thats why you can stop checkTime now.
+                    checkTime.interrupt();
                 } catch (IOException e) {
                     Log.i("UDP Socket",e.toString());
                     e.printStackTrace();
                 }
+                // getting the data from the UDP packet
                 byte msg [] = packet.getData();
                 decodeData(msg, packet.getLength());
                 }
             receiver.close();
             }
-        public void decodeData(byte msg [], int length){
+
+        /**
+         * Method for decoding a received Message. It decodes the Message by getting the ID and  calling the Methods on the offset
+         * @param msg message received by the UDP socket
+         * @param length length of the message
+         */
+        private void decodeData(byte msg [], int length){
             Log.i("decode Data was called ", "Package with length "+length);
             for(int i=0; i<length;i++) {
                 if (msg[i] == ID_SENSORS) {
@@ -312,6 +388,8 @@ public class HotspotService extends Service {
                 send.start();
             }
         }
+
+    // Just a Method for testing some stuff not really needed here
     public void sendRandomnumbers(){
         Log.i("Random numbers","called");
         Random rand = new Random();

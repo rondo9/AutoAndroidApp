@@ -1,10 +1,14 @@
 package son.appo;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,6 +24,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import services.HotspotService;
+// Son du kannst jetzt die einzelen Sensoren mit getter Methoden holen
+//Das geht einfach durch hotspotService.getSensorBottomLeft(); für den Sensor unten Links
+// hotspoService.getCurrenInstruction funktioniert jetzt 0x00 = turn left, 0x01 = go straight, 0x02 = turn right, park = 0x03, stop = 0x04
+// aktuell bekommst du immer 2.5 für jeden Sensor aber wenn die App zu meiner VirtualCAr verbunden ist kommen andere Werte
 public class ShowActivity extends AppCompatActivity {
 
     String[] strings = {"STRAIGHT","LEFT", "RIGHT", "STOP"};
@@ -33,10 +42,52 @@ public class ShowActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
 
+
+    // for the service
+    boolean mBound;
+    HotspotService hotspotService;
+    private ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className,
+                                       IBinder service) {
+            // We've bound to LocalService, cast the IBinder and get LocalService instance
+            HotspotService.LocalBinder binder = (HotspotService.LocalBinder) service;
+            hotspotService = binder.getService();
+            // This Thread is necessary for a short break. You need the break to prevent that this activity
+            // starts a Receiving or Requesting while another activity is calling stopReceiving because onStart ans Onstop
+            // is always called new activity calls onStart then old calls OnStop
+            Thread x = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    hotspotService.startReceive();
+                    hotspotService.startRequest();
+                }
+            });
+            x.start();
+            mBound = true;
+            Log.i("ShowActivity", "OnServiceConnected");
+
+        }
+        @Override
+        // Called when the connection with the service disconnects unexpectedly
+        public void onServiceDisconnected(ComponentName arg0) {
+            mBound = false;
+        }
+
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Log.i("ShowActivity", "OnCreate is called");
 
         //here comes the drawer stuff
         mPlanetTitles = getResources().getStringArray(R.array.draweritems_array);
@@ -67,6 +118,48 @@ public class ShowActivity extends AppCompatActivity {
                 ShowActivity.this.startActivity(myIntent);
             }
         });
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i("ShowActivity", "start Service was called");
+        // binding the Service to the activity
+        Intent intent = new Intent(this, HotspotService.class);
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+        if(mBound){
+            // start the to receive and request data form the car
+            hotspotService.startRequest();
+            hotspotService.startReceive();
+            Log.i("ShowActivity", "bindService");
+        }
+        else{
+
+        }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i("ShowActivity", "onResume is called");
+        if(mBound){
+            // start the to receive and request data form the car
+            hotspotService.startRequest();
+            hotspotService.startReceive();
+            Log.i("ShowActivity", "bindService");
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        // Unbind from the service
+        if (mBound) {
+            hotspotService.quitReceive();
+            hotspotService.quitRequest();
+            unbindService(mConnection);
+            mBound = false;
+            Log.i("ShowActivity", "unbindService");
+        }
+
+        super.onStop();
     }
 
     @Override
