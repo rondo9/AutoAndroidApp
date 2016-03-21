@@ -72,6 +72,7 @@ public class DiagnosisActivity extends AppCompatActivity {
             Log.i("ShowActivity", "OnServiceConnected");
 
         }
+
         @Override
         // Called when the connection with the service disconnects unexpectedly
         public void onServiceDisconnected(ComponentName arg0) {
@@ -104,24 +105,27 @@ public class DiagnosisActivity extends AppCompatActivity {
     }
 
     // Update function for sensors, this will be called repeatedly EVERY 1000ms
-    private void updateSensors(){
-        if(mBound){
-        TextView valTopLeft = (TextView) findViewById(R.id.valTopLeft);
-        valTopLeft.setText(hotspotService.getSensorTopLeft() + "");
-        TextView valTopMid = (TextView) findViewById(R.id.valTopMid);
-        valTopMid.setText(hotspotService.getSensorTopMiddle() + "");
-        TextView valTopRight = (TextView) findViewById(R.id.valTopRight);
-        valTopRight.setText(hotspotService.getSensorTopRight() + "");
-        TextView valMidLeft = (TextView) findViewById(R.id.valMidLeft);
-        valMidLeft.setText(hotspotService.getSensorMiddleLeft() + "");
-        TextView valMidRight = (TextView) findViewById(R.id.valMidRight);
-        valMidRight.setText(hotspotService.getSensorMiddleRight() + "");
-        TextView valBotLeft = (TextView) findViewById(R.id.valBotLeft);
-        valBotLeft.setText(hotspotService.getSensorBottomLeft() + "");
-        TextView valBotMid = (TextView) findViewById(R.id.valBotMid);
-        valBotMid.setText(hotspotService.getSensorBottomMiddle() + "");
-        TextView valBotRight = (TextView) findViewById(R.id.valBotRight);
-        valBotRight.setText(hotspotService.getSensorBottomRight() + "");}
+    private void updateSensors() {
+        if (mBound) {
+            TextView valTopLeft = (TextView) findViewById(R.id.valTopLeft);
+            valTopLeft.setText(hotspotService.getSensorTopLeft() + "");
+            TextView valTopMid = (TextView) findViewById(R.id.valTopMid);
+            valTopMid.setText(hotspotService.getSensorTopMiddle() + "");
+            TextView valTopRight = (TextView) findViewById(R.id.valTopRight);
+            valTopRight.setText(hotspotService.getSensorTopRight() + "");
+            TextView valMidLeft = (TextView) findViewById(R.id.valMidLeft);
+            valMidLeft.setText(hotspotService.getSensorMiddleLeft() + "");
+            TextView valMidRight = (TextView) findViewById(R.id.valMidRight);
+            valMidRight.setText(hotspotService.getSensorMiddleRight() + "");
+            TextView valBotLeft = (TextView) findViewById(R.id.valBotLeft);
+            valBotLeft.setText(hotspotService.getSensorBottomLeft() + "");
+            TextView valBotMid = (TextView) findViewById(R.id.valBotMid);
+            valBotMid.setText(hotspotService.getSensorBottomMiddle() + "");
+            TextView valBotRight = (TextView) findViewById(R.id.valBotRight);
+            valBotRight.setText(hotspotService.getSensorBottomRight() + "");
+            TextView valConnection = (TextView) findViewById(R.id.valConnection);
+            valConnection.setText(mBound ? "ON" : "OFF");
+        }
     }
 
     // These following 3 functions repeat/stop the process of updating sensors
@@ -133,9 +137,11 @@ public class DiagnosisActivity extends AppCompatActivity {
             myRepeatHandler.postDelayed(myStatus, 1000);
         }
     };
+
     void startRepeatRandom() {
         myStatus.run();
     }
+
     void stopRepeatingTask() {
         myRepeatHandler.removeCallbacks(myStatus);
     }
@@ -148,7 +154,7 @@ public class DiagnosisActivity extends AppCompatActivity {
         // Binding the Service to the activity
         Intent intent = new Intent(this, HotspotService.class);
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-        if(mBound){
+        if (mBound) {
             // Start the to receive and request data form the car
             hotspotService.startRequest();
             hotspotService.startReceive();
@@ -178,23 +184,29 @@ public class DiagnosisActivity extends AppCompatActivity {
             selectItem(position);
         }
     }
+
     private void selectItem(int position) {
         // What happens when item is selected
-        if(position==0){
-            Intent myIntent= new Intent(this, ConnectActivity.class);
-            startActivity(myIntent);}
-        if(position==1){
-            Intent myIntent= new Intent(this, ShowActivity.class);
-            startActivity(myIntent);}
-        if(position==2){
-            Intent myIntent= new Intent(this, DiagnosisActivity.class);
-            startActivity(myIntent);}
-        if(position==3){
-            Intent myIntent= new Intent(this, RemoteActivity.class);
-            startActivity(myIntent);}
-        if(position==4){
-            Intent myIntent= new Intent(this, CommandActivity.class);
-            startActivity(myIntent);}
+        if (position == 0) {
+            Intent myIntent = new Intent(this, ConnectActivity.class);
+            startActivity(myIntent);
+        }
+        if (position == 1) {
+            Intent myIntent = new Intent(this, ShowActivity.class);
+            startActivity(myIntent);
+        }
+        if (position == 2) {
+            Intent myIntent = new Intent(this, DiagnosisActivity.class);
+            startActivity(myIntent);
+        }
+        if (position == 3) {
+            Intent myIntent = new Intent(this, RemoteActivity.class);
+            startActivity(myIntent);
+        }
+        if (position == 4) {
+            Intent myIntent = new Intent(this, CommandActivity.class);
+            startActivity(myIntent);
+        }
 
         // Update selected item and title, then close the drawer
         mDrawerList.setItemChecked(position, true);

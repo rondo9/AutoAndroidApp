@@ -1,124 +1,124 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:2:1-57:12
+ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:2:1-57:12
 	package
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:3:5-23
-		INJECTED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:3:5-23
+		INJECTED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml
+		INJECTED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml
+		INJECTED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml
+		INJECTED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:2:11-69
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:2:11-69
 	android:versionCode
-		INJECTED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml
+		INJECTED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml
+		INJECTED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml
 uses-permission#android.permission.GET_ACCOUNTS
-ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:6:5-71
+ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:6:5-71
 	android:name
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:6:22-68
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:6:22-68
 uses-permission#android.permission.READ_PROFILE
-ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:7:5-71
+ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:7:5-71
 	android:name
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:7:22-68
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:7:22-68
 uses-permission#android.permission.READ_CONTACTS
-ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:8:5-72
+ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:8:5-72
 	android:name
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:8:22-69
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:8:22-69
 uses-permission#android.permission.CHANGE_WIFI_STATE
-ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:9:5-76
+ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:9:5-76
 	android:name
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:9:22-73
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:9:22-73
 uses-permission#android.permission.INTERNET
-ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:10:5-66
+ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:10:5-66
 	android:name
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:10:22-64
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:10:22-64
 uses-permission#android.permission.ACCESS_FINE_LOCATION
-ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:11:5-78
+ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:11:5-78
 	android:name
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:11:22-76
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:11:22-76
 application
-ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:13:5-55:19
-MERGED from [com.android.support:appcompat-v7:23.1.0] /Users/philipp/Desktop/AppO/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:23.1.0] /Users/philipp/Desktop/AppO/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:23.1.0] /Users/philipp/Desktop/AppO/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:design:23.1.0] /Users/philipp/Desktop/AppO/app/build/intermediates/exploded-aar/com.android.support/design/23.1.0/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:appcompat-v7:23.1.0] /Users/philipp/Desktop/AppO/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:23.1.0] /Users/philipp/Desktop/AppO/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:23.1.0] /Users/philipp/Desktop/AppO/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:23.1.0] /Users/philipp/Desktop/AppO/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:22:5-20
+ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:13:5-55:19
+MERGED from [com.android.support:appcompat-v7:23.1.0] D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.1.0] D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.1.0] D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:design:23.1.0] D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\build\intermediates\exploded-aar\com.android.support\design\23.1.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:appcompat-v7:23.1.0] D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.1.0] D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.1.0] D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:23.1.0] D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\AndroidManifest.xml:22:5-20
 	android:label
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:16:9-41
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:16:9-41
 	android:supportsRtl
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:17:9-35
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:17:9-35
 	android:allowBackup
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:14:9-35
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:14:9-35
 	android:icon
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:15:9-42
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:15:9-42
 	android:theme
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:18:9-40
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:18:9-40
 activity#son.appo.ShowActivity
-ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:19:9-28:20
+ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:19:9-28:20
 	android:name
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:19:19-47
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:19:19-47
 service#services.HotspotService
-ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:29:9-31:19
+ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:29:9-31:19
 	android:name
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:29:18-56
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:29:18-56
 activity#son.appo.ConnectActivity
-ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:32:9-41:20
+ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:32:9-41:20
 	android:label
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:34:13-45
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:34:13-45
 	android:theme
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:35:13-56
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:35:13-56
 	android:name
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:33:13-44
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:33:13-44
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:36:13-40:29
+ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:36:13-40:29
 action#android.intent.action.MAIN
-ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:37:17-69
+ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:37:17-69
 	android:name
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:37:25-66
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:37:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:39:17-77
+ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:39:17-77
 	android:name
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:39:27-74
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:39:27-74
 activity#son.appo.DiagnosisActivity
-ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:42:9-43:20
+ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:42:9-43:20
 	android:name
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:42:19-52
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:42:19-52
 activity#son.appo.SettingsActivity
-ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:44:9-47:20
+ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:44:9-47:20
 	android:label
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:46:13-60
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:46:13-60
 	android:name
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:45:13-45
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:45:13-45
 activity#son.appo.CommandActivity
-ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:48:9-52:20
+ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:48:9-52:20
 	android:label
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:50:13-59
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:50:13-59
 	android:theme
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:51:13-56
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:51:13-56
 	android:name
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:49:13-44
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:49:13-44
 activity#son.appo.RemoteActivity
-ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:53:9-54:20
+ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:53:9-54:20
 	android:name
-		ADDED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml:53:19-49
+		ADDED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml:53:19-49
 uses-sdk
-INJECTED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
-MERGED from [com.android.support:appcompat-v7:23.1.0] /Users/philipp/Desktop/AppO/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:23.1.0] /Users/philipp/Desktop/AppO/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:23.1.0] /Users/philipp/Desktop/AppO/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:design:23.1.0] /Users/philipp/Desktop/AppO/app/build/intermediates/exploded-aar/com.android.support/design/23.1.0/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:appcompat-v7:23.1.0] /Users/philipp/Desktop/AppO/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:23.1.0] /Users/philipp/Desktop/AppO/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:recyclerview-v7:23.1.0] /Users/philipp/Desktop/AppO/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.0/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:23.1.0] /Users/philipp/Desktop/AppO/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:23.1.0] /Users/philipp/Desktop/AppO/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/AndroidManifest.xml:20:5-43
+INJECTED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:appcompat-v7:23.1.0] D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.1.0] D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.1.0] D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:design:23.1.0] D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\build\intermediates\exploded-aar\com.android.support\design\23.1.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:23.1.0] D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.1.0] D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:recyclerview-v7:23.1.0] D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.1.0] D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:23.1.0] D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\AndroidManifest.xml:20:5-43
 	android:targetSdkVersion
-		INJECTED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml
+		INJECTED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml
+		INJECTED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml
-		INJECTED from /Users/philipp/Desktop/AppO/app/src/main/AndroidManifest.xml
+		INJECTED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml
+		INJECTED from D:\TUM\M3_WS15\Autonomous Driving\AutoAndroidApp\app\src\main\AndroidManifest.xml
