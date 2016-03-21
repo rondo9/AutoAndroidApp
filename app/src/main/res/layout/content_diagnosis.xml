@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="     Top Left"
-            android:id="@+id/textView3"
+            android:id="@+id/tvTopLeft"
             android:layout_row="1"
             android:layout_column="0" />
 
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="00.00"
-            android:id="@+id/textView4"
+            android:id="@+id/valTopLeft"
             android:layout_row="1"
             android:layout_column="2" />
 
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="     Top Mid"
-            android:id="@+id/textView5"
+            android:id="@+id/tvTopMid"
             android:layout_row="2"
             android:layout_column="0" />
 
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="00.00"
-            android:id="@+id/textView7"
+            android:id="@+id/valTopMid"
             android:layout_row="2"
             android:layout_column="2" />
 
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="     Top Right"
-            android:id="@+id/textView6"
+            android:id="@+id/tvTopRight"
             android:layout_row="3"
             android:layout_column="0" />
 
@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="00.00"
-            android:id="@+id/textView8"
+            android:id="@+id/valTopRight"
             android:layout_row="3"
             android:layout_column="2" />
 
@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="     Mid left"
-            android:id="@+id/textView11"
+            android:id="@+id/tvMidLeft"
             android:layout_row="6"
             android:layout_column="0" />
 
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="00.00"
-            android:id="@+id/textView13"
+            android:id="@+id/valMidLeft"
             android:layout_row="6"
             android:layout_column="2" />
 
@@ -113,7 +113,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="     Mid right"
-            android:id="@+id/textView12"
+            android:id="@+id/tvMidRight"
             android:layout_row="7"
             android:layout_column="0" />
 
@@ -122,7 +122,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="00.00"
-            android:id="@+id/textView14"
+            android:id="@+id/valMidRight"
             android:layout_row="7"
             android:layout_column="2" />
 
@@ -148,7 +148,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="     Bottom left"
-            android:id="@+id/textView17"
+            android:id="@+id/tvBotLeft"
             android:layout_row="10"
             android:layout_column="0" />
 
@@ -157,7 +157,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="00.00"
-            android:id="@+id/textView20"
+            android:id="@+id/valBotLeft"
             android:layout_row="10"
             android:layout_column="2" />
 
@@ -166,7 +166,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="     Bottom mid"
-            android:id="@+id/textView18"
+            android:id="@+id/tvBotMid"
             android:layout_row="11"
             android:layout_column="0" />
 
@@ -175,7 +175,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="00.00"
-            android:id="@+id/textView21"
+            android:id="@+id/valBotMid"
             android:layout_row="11"
             android:layout_column="2" />
 
@@ -184,7 +184,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="     Bottom right"
-            android:id="@+id/textView19"
+            android:id="@+id/tvBotRight"
             android:layout_row="12"
             android:layout_column="0" />
 
@@ -193,7 +193,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="00.00"
-            android:id="@+id/textView22"
+            android:id="@+id/valBotRight"
             android:layout_row="12"
             android:layout_column="2" />
 
@@ -219,7 +219,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="     Status"
-            android:id="@+id/textView25"
+            android:id="@+id/tvConnection"
             android:layout_row="15"
             android:layout_column="0" />
 
@@ -228,7 +228,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="ON"
-            android:id="@+id/textView26"
+            android:id="@+id/valConnection"
             android:layout_row="15"
             android:layout_column="2"
             android:textAlignment="textEnd" />

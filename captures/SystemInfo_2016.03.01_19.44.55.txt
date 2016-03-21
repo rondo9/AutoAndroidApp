@@ -1,0 +1,213 @@
+TASK son.appo id=97
+  ACTIVITY son.appo/.RemoteActivity 42010f58 pid=17582
+    Local FragmentActivity 42051440 State:
+      mCreated=truemResumed=true mStopped=false mReallyStopped=false
+      mLoadersStarted=true
+    FragmentManager misc state:
+      mHost=android.support.v4.app.FragmentActivity$HostCallbacks@420871e0
+      mContainer=android.support.v4.app.FragmentActivity$HostCallbacks@420871e0
+      mCurState=5 mStateSaved=false mDestroyed=false
+    View Hierarchy:
+      com.android.internal.policy.impl.PhoneWindow$DecorView{4200ecd8 V.E..... ... 0,0-720,1184}
+        android.widget.LinearLayout{4208f590 V.E..... ... 0,0-720,1184}
+          android.view.ViewStub{41fe9648 G.E..... ... 0,0-0,0 #1020310}
+          android.widget.FrameLayout{42040ea0 V.E..... ... 0,50-720,1184}
+            android.support.v7.internal.widget.ActionBarOverlayLayout{4202cb30 V.ED.... ... 0,0-720,1134 #7f0e0058 app:id/decor_content_parent}
+              android.support.v7.internal.widget.ContentFrameLayout{4204ebb0 V.ED.... ... 0,112-720,1134 #1020002 android:id/content}
+                android.support.v4.widget.DrawerLayout{41fee780 VFE..... F.. 0,0-720,1022 #7f0e0069 app:id/drawer_layout}
+                  android.widget.FrameLayout{42050608 V.E..... ... 0,0-720,1022 #7f0e006a app:id/content_frame}
+                  android.widget.RelativeLayout{41fe7990 V.E..... ... 0,0-720,1022}
+                    android.support.v7.widget.AppCompatButton{41fcb728 VFED..C. ... 254,217-465,313 #7f0e00ac app:id/button}
+                    android.support.v7.widget.AppCompatButton{420297e8 VFED..C. ... 544,463-720,559 #7f0e00ad app:id/button_right}
+                    android.support.v7.widget.AppCompatButton{41fdec68 VFED..C. ... 0,463-176,559 #7f0e00ae app:id/button_left}
+                    android.support.v7.widget.AppCompatButton{42009928 VFED..C. ... 465,742-704,838 #7f0e00af app:id/button_switch}
+                  android.widget.ListView{41fe0298 IFED.VC. ... -480,0-0,1022 #7f0e00b7 app:id/left_drawer}
+                    android.support.v7.widget.AppCompatTextView{42077418 V.ED.... ... 0,0-480,96 #1020014 android:id/text1}
+                    android.support.v7.widget.AppCompatTextView{4207b598 V.ED.... ... 0,98-480,194 #1020014 android:id/text1}
+                    android.support.v7.widget.AppCompatTextView{42042488 V.ED.... ... 0,196-480,292 #1020014 android:id/text1}
+                    android.support.v7.widget.AppCompatTextView{41fb24e8 V.ED.... ... 0,294-480,390 #1020014 android:id/text1}
+                    android.support.v7.widget.AppCompatTextView{42078278 V.ED.... ... 0,392-480,488 #1020014 android:id/text1}
+              android.support.v7.internal.widget.ActionBarContainer{4204f058 V.ED.... ... 0,0-720,112 #7f0e0059 app:id/action_bar_container}
+                android.support.v7.widget.Toolbar{41fdbbf8 V.E..... ... 0,0-720,112 #7f0e005a app:id/action_bar}
+                  android.widget.TextView{41fda0f0 V.ED.... ... 32,29-137,83}
+                  android.support.v7.widget.ActionMenuView{42074a38 V.E..... ... 720,0-720,112}
+                android.support.v7.internal.widget.ActionBarContextView{4204e7f0 G.E..... ... 0,0-0,0 #7f0e005b app:id/action_context_bar}
+
+  ACTIVITY son.appo/.ShowActivity 42008c28 pid=17582
+    Local FragmentActivity 42080a00 State:
+      mCreated=truemResumed=false mStopped=true mReallyStopped=true
+      mLoadersStarted=true
+    FragmentManager misc state:
+      mHost=android.support.v4.app.FragmentActivity$HostCallbacks@42080c80
+      mContainer=android.support.v4.app.FragmentActivity$HostCallbacks@42080c80
+      mCurState=2 mStateSaved=true mDestroyed=false
+    View Hierarchy:
+      com.android.internal.policy.impl.PhoneWindow$DecorView{42081850 I.E..... ... 0,0-720,1184}
+        android.widget.LinearLayout{42081f80 V.E..... ... 0,0-720,1184}
+          android.view.ViewStub{42082a20 G.E..... ... 0,0-0,0 #1020310}
+          android.widget.FrameLayout{42082c80 V.E..... ... 0,50-720,1184}
+            android.support.v7.internal.widget.ActionBarOverlayLayout{42085118 V.ED.... ... 0,0-720,1134 #7f0e0058 app:id/decor_content_parent}
+              android.support.v7.internal.widget.ContentFrameLayout{42086d18 V.ED.... ... 0,112-720,1134 #1020002 android:id/content}
+                android.support.v4.widget.DrawerLayout{4209c818 VFE..... ... 0,0-720,1022 #7f0e0069 app:id/drawer_layout}
+                  android.widget.FrameLayout{4209cfd8 V.E..... ... 0,0-720,1022 #7f0e006d app:id/content_frame_main}
+                  android.widget.RelativeLayout{4209d600 V.E..... ... 0,0-720,1022}
+                    android.widget.GridLayout{4209e138 V.E..... ... 0,0-720,1022}
+                      android.widget.FrameLayout{4209eeb0 V.E..... ... 0,0-720,454}
+                        android.support.v7.widget.AppCompatTextView{4209f2e0 V.ED.... ... -159,-859-841,141 #7f0e0098 app:id/tvTopLeftBack}
+                        android.support.v7.widget.AppCompatTextView{420a0a28 V.ED.... ... -159,313-841,1313 #7f0e0099 app:id/tvBotLeftBack}
+                        android.support.v7.widget.AppCompatTextView{420a11f0 V.ED.... ... -121,-859-879,141 #7f0e009a app:id/tvTopRightBack}
+                        android.support.v7.widget.AppCompatTextView{420a19b8 V.ED.... ... -121,313-879,1313 #7f0e009b app:id/tvBotRightBack}
+                        android.support.v7.widget.AppCompatTextView{420a2180 V.ED.... ... 210,-619-510,181 #7f0e009c app:id/tvTopMidBack}
+                        android.support.v7.widget.AppCompatTextView{420a2fc0 V.ED.... ... -499,97-301,357 #7f0e009d app:id/tvLeftBack}
+                        android.support.v7.widget.AppCompatTextView{420a3e20 V.ED.... ... 419,97-1219,357 #7f0e009e app:id/tvRightBack}
+                        android.support.v7.widget.AppCompatTextView{420a45e8 V.ED.... ... 210,273-510,1073 #7f0e009f app:id/tvBotMidBack}
+                        android.support.v7.widget.AppCompatTextView{420a4db0 V.ED.... ... 230,67-490,387 #7f0e00a0 app:id/tvMid}
+                        android.support.v7.widget.AppCompatTextView{41fe2f00 V.ED.... ... 10,204-224,250 #7f0e00a1 app:id/tvLeft}
+                        android.support.v7.widget.AppCompatTextView{41fefce0 V.ED.... ... 317,0-402,46 #7f0e00a2 app:id/tvTopMid}
+                        android.support.v7.widget.AppCompatTextView{41ff16d8 V.ED.... ... 625,204-710,250 #7f0e00a3 app:id/tvRight}
+                        android.support.v7.widget.AppCompatTextView{41ff4638 V.ED.... ... 317,408-402,454 #7f0e00a4 app:id/tvBotMid}
+                        android.widget.LinearLayout{41fbbcd8 V.E..... ... 186,74-534,380}
+                          android.support.v7.widget.AppCompatSpinner{41fca850 VFED..C. ... 0,0-348,306 #7f0e00a5 app:id/spinner}
+                            android.widget.RelativeLayout{41fc2968 V.E..... ... 0,97-316,209}
+                              android.support.v7.widget.AppCompatImageView{41fc1160 V.ED.... ... 6,6-85,85 #7f0e003f app:id/image}
+                              android.support.v7.widget.AppCompatTextView{41feb640 V.ED.... ... 95,10-107,60 #7f0e00c5 app:id/direction}
+                              android.support.v7.widget.AppCompatTextView{4208c860 V.ED.... ... 95,60-103,106 #7f0e00c6 app:id/sub}
+                        android.support.v7.widget.AppCompatTextView{42087f40 V.ED.... ... 100,0-185,46 #7f0e00a6 app:id/tvTopLeft}
+                        android.support.v7.widget.AppCompatTextView{41fce910 V.ED.... ... 535,0-620,46 #7f0e00a7 app:id/tvTopRight}
+                        android.support.v7.widget.AppCompatTextView{41fe3268 V.ED.... ... 535,408-620,454 #7f0e00a8 app:id/tvBotRight}
+                        android.support.v7.widget.AppCompatTextView{41fe5250 V.ED.... ... 100,408-185,454 #7f0e00a9 app:id/tvBotLeft}
+                        android.support.v7.widget.AppCompatButton{41fe8178 VFED..C. ... 446,180-516,250 #7f0e00aa app:id/buttonInfo}
+                      android.widget.VideoView{41fc57a0 VFE..... ... 0,454-720,1030 #7f0e00ab app:id/videoView}
+                  android.widget.ListView{41fc3668 VFED.VC. F.. -467,0-13,1022 #7f0e00b7 app:id/left_drawer}
+                    android.support.v7.widget.AppCompatTextView{42095c48 V.ED.... ... 0,0-480,96 #1020014 android:id/text1}
+                    android.support.v7.widget.AppCompatTextView{41fc4510 V.ED.... ... 0,98-480,194 #1020014 android:id/text1}
+                    android.support.v7.widget.AppCompatTextView{41fdd4c8 V.ED.... ... 0,196-480,292 #1020014 android:id/text1}
+                    android.support.v7.widget.AppCompatTextView{41fe55c0 V.ED.... ... 0,294-480,390 #1020014 android:id/text1}
+                    android.support.v7.widget.AppCompatTextView{41feb9b0 V.ED.... ... 0,392-480,488 #1020014 android:id/text1}
+              android.support.v7.internal.widget.ActionBarContainer{42087900 V.ED.... ... 0,0-720,112 #7f0e0059 app:id/action_bar_container}
+                android.support.v7.widget.Toolbar{42088900 V.E..... ... 0,0-720,112 #7f0e005a app:id/action_bar}
+                  android.widget.TextView{4209bfc8 V.ED.... ... 32,29-313,83}
+                  android.support.v7.widget.ActionMenuView{41fd7b78 V.E..... ... 640,0-720,112}
+                    android.support.v7.widget.ActionMenuPresenter$OverflowMenuButton{41fca1d8 VFED..C. ... 0,8-80,104}
+                android.support.v7.internal.widget.ActionBarContextView{420960a8 G.E..... ... 0,0-0,0 #7f0e005b app:id/action_context_bar}
+
+  ACTIVITY son.appo/.CommandActivity 41fe1840 pid=17582
+    Local FragmentActivity 4203a310 State:
+      mCreated=truemResumed=false mStopped=true mReallyStopped=true
+      mLoadersStarted=true
+    FragmentManager misc state:
+      mHost=android.support.v4.app.FragmentActivity$HostCallbacks@4203a590
+      mContainer=android.support.v4.app.FragmentActivity$HostCallbacks@4203a590
+      mCurState=2 mStateSaved=true mDestroyed=false
+    View Hierarchy:
+      com.android.internal.policy.impl.PhoneWindow$DecorView{4203b4c0 I.E..... ... 0,0-720,1184}
+        android.widget.LinearLayout{4203bbf0 V.E..... ... 0,0-720,1184}
+          android.view.ViewStub{4203c690 G.E..... ... 0,0-0,0 #1020310}
+          android.widget.FrameLayout{4203c8f0 V.E..... ... 0,50-720,1184}
+            android.support.v7.internal.widget.FitWindowsLinearLayout{4203e168 V.E..... ... 0,0-720,1134 #7f0e0055 app:id/action_bar_root}
+              android.support.v7.internal.widget.ViewStubCompat{4203e4a0 G.E..... ... 0,0-0,0 #7f0e0056 app:id/action_mode_bar_stub}
+              android.support.v7.internal.widget.ContentFrameLayout{4203e900 V.ED.... ... 0,0-720,1134 #1020002 android:id/content}
+                android.support.v4.widget.DrawerLayout{4203f2a8 VFE..... F.. 0,0-720,1134 #7f0e0069 app:id/drawer_layout}
+                  android.widget.FrameLayout{4203fa68 V.E..... ... 0,0-720,1134 #7f0e006a app:id/content_frame}
+                  android.widget.RelativeLayout{42040040 V.E..... ... 0,0-720,1134}
+                    android.support.v7.widget.AppCompatSpinner{42042aa0 VFED..C. ... 60,100-660,212 #7f0e006e app:id/spinner0}
+                      android.widget.RelativeLayout{4205f460 V.E..... ... 0,0-568,112}
+                        android.support.v7.widget.AppCompatImageView{4205fda8 V.ED.... ... 6,6-85,85 #7f0e003f app:id/image}
+                        android.support.v7.widget.AppCompatTextView{42066d60 V.ED.... ... 95,10-244,60 #7f0e00c5 app:id/direction}
+                        android.support.v7.widget.AppCompatTextView{42067bb0 V.ED.... ... 95,60-303,106 #7f0e00c6 app:id/sub}
+                    android.support.v7.widget.AppCompatSpinner{42051df8 VFED..C. ... 60,496-660,608 #7f0e006f app:id/spinner1}
+                      android.widget.RelativeLayout{4206cdf8 V.E..... ... 0,0-568,112}
+                        android.support.v7.widget.AppCompatImageView{4206d230 V.ED.... ... 6,6-85,85 #7f0e003f app:id/image}
+                        android.support.v7.widget.AppCompatTextView{4206d8d8 V.ED.... ... 95,10-244,60 #7f0e00c5 app:id/direction}
+                        android.support.v7.widget.AppCompatTextView{4206de58 V.ED.... ... 95,60-303,106 #7f0e00c6 app:id/sub}
+                    android.support.v7.widget.AppCompatSpinner{420532a8 VFED..C. ... 60,364-660,476 #7f0e0070 app:id/spinner2}
+                      android.widget.RelativeLayout{4206ad30 V.E..... ... 0,0-568,112}
+                        android.support.v7.widget.AppCompatImageView{4206b168 V.ED.... ... 6,6-85,85 #7f0e003f app:id/image}
+                        android.support.v7.widget.AppCompatTextView{4206b810 V.ED.... ... 95,10-244,60 #7f0e00c5 app:id/direction}
+                        android.support.v7.widget.AppCompatTextView{4206bd90 V.ED.... ... 95,60-303,106 #7f0e00c6 app:id/sub}
+                    android.support.v7.widget.AppCompatSpinner{42054758 VFED..C. ... 60,232-660,344 #7f0e0071 app:id/spinner3}
+                      android.widget.RelativeLayout{42068c68 V.E..... ... 0,0-568,112}
+                        android.support.v7.widget.AppCompatImageView{420690a0 V.ED.... ... 6,6-85,85 #7f0e003f app:id/image}
+                        android.support.v7.widget.AppCompatTextView{42069748 V.ED.... ... 95,10-244,60 #7f0e00c5 app:id/direction}
+                        android.support.v7.widget.AppCompatTextView{42069cc8 V.ED.... ... 95,60-303,106 #7f0e00c6 app:id/sub}
+                    android.support.v7.widget.AppCompatButton{42055c48 VFED..C. ... 272,668-448,764 #7f0e0072 app:id/commandButton}
+                  android.widget.ListView{42057058 IFED.VC. ... -480,0-0,1134 #7f0e00b7 app:id/left_drawer}
+                    android.support.v7.widget.AppCompatTextView{4206ff00 V.ED.... ... 0,0-480,96 #1020014 android:id/text1}
+                    android.support.v7.widget.AppCompatTextView{42070900 V.ED.... ... 0,98-480,194 #1020014 android:id/text1}
+                    android.support.v7.widget.AppCompatTextView{42071300 V.ED.... ... 0,196-480,292 #1020014 android:id/text1}
+                    android.support.v7.widget.AppCompatTextView{42071d00 V.ED.... ... 0,294-480,390 #1020014 android:id/text1}
+                    android.support.v7.widget.AppCompatTextView{42072700 V.ED.... ... 0,392-480,488 #1020014 android:id/text1}
+
+  ACTIVITY son.appo/.ConnectActivity 42a4dfd0 pid=17582
+    Local FragmentActivity 41fc6278 State:
+      mCreated=truemResumed=false mStopped=true mReallyStopped=true
+      mLoadersStarted=true
+    FragmentManager misc state:
+      mHost=android.support.v4.app.FragmentActivity$HostCallbacks@41fc71e8
+      mContainer=android.support.v4.app.FragmentActivity$HostCallbacks@41fc71e8
+      mCurState=2 mStateSaved=true mDestroyed=false
+    View Hierarchy:
+      com.android.internal.policy.impl.PhoneWindow$DecorView{41fcee50 I.E..... ... 0,0-720,1184}
+        android.widget.LinearLayout{41fd3900 V.E..... ... 0,0-720,1184}
+          android.view.ViewStub{41fd69a0 G.E..... ... 0,0-0,0 #1020310}
+          android.widget.FrameLayout{41fd6dd0 V.E..... ... 0,50-720,1184}
+            android.support.v7.internal.widget.FitWindowsLinearLayout{41fda598 V.E..... ... 0,0-720,1134 #7f0e0055 app:id/action_bar_root}
+              android.support.v7.internal.widget.ViewStubCompat{41fdac70 G.E..... ... 0,0-0,0 #7f0e0056 app:id/action_mode_bar_stub}
+              android.support.v7.internal.widget.ContentFrameLayout{41fdb4d8 V.ED.... ... 0,0-720,1134 #1020002 android:id/content}
+                android.support.v4.widget.DrawerLayout{41fe2c20 VFE..... ... 0,0-720,1134 #7f0e0069 app:id/drawer_layout}
+                  android.widget.FrameLayout{41fea8a0 V.E..... ... 0,0-720,1134 #7f0e006b app:id/content_frame_connect}
+                  android.widget.RelativeLayout{41fec4e8 V.E..... ... 0,0-720,1134}
+                    android.widget.TableLayout{41fed170 V.E..... ... 60,100-660,760 #7f0e0073 app:id/tableLayout}
+                      android.widget.TableRow{41fee050 V.E..... ... 0,0-600,81}
+                        android.support.v7.widget.AppCompatTextView{41feeb70 V.ED.... ... 0,0-381,81 #7f0e0074 app:id/tvHotspotName}
+                      android.widget.TableRow{41ff3c40 V.E..... ... 0,81-600,177}
+                        android.support.v7.widget.AppCompatEditText{41ff4378 VFED..CL F.. 0,0-981,96 #7f0e0075 app:id/etHotspotName}
+                      android.widget.TableRow{41ff9e28 V.E..... ... 0,177-600,258}
+                        android.support.v7.widget.AppCompatTextView{41ffa130 V.ED.... ... 0,0-381,81 #7f0e0076 app:id/tvHotspotPW}
+                      android.widget.TableRow{41ffa660 V.E..... ... 0,258-600,354}
+                        android.support.v7.widget.AppCompatEditText{41ffa968 VFED..CL ... 0,0-981,96 #7f0e0077 app:id/etHotspotPW}
+                      android.widget.TableRow{41ffd1d0 V.E..... ... 0,354-600,421}
+                        android.support.v7.widget.AppCompatTextView{41ffd4d8 V.ED.... ... 0,0-381,67 #7f0e0078 app:id/textView}
+                      android.widget.TableRow{41ffd9c0 V.E..... ... 0,421-600,421}
+                      android.widget.TableRow{41ffdd08 V.E..... ... 0,421-600,421}
+                      android.widget.TableRow{41ffe050 V.E..... ... 0,421-600,421}
+                      android.widget.TableRow{41ffe398 V.E..... ... 0,421-600,421}
+                      android.widget.TableRow{41ffe6e0 V.E..... ... 0,421-600,421}
+                      android.widget.TableRow{41ffea28 V.E..... ... 0,421-600,421}
+                      android.widget.TableRow{41ffed70 V.E..... ... 0,421-600,421}
+                      android.widget.TableRow{41fff0b8 V.E..... ... 0,421-600,421}
+                      android.widget.TableRow{41fff478 V.E..... ... 0,421-600,421}
+                      android.widget.TableRow{41fff7c0 V.E..... ... 0,421-600,421}
+                      android.widget.TableRow{41fffb08 V.E..... ... 0,421-600,421}
+                      android.widget.TableRow{41fffe50 V.E..... ... 0,421-600,421}
+                      android.widget.TableRow{42000198 V.E..... ... 0,421-600,421}
+                      android.widget.TableRow{420004e0 V.E..... ... 0,421-600,421}
+                      android.widget.TableRow{42000828 V.E..... ... 0,421-600,544}
+                        android.support.v7.widget.AppCompatTextView{42000b30 V.ED.... ... 0,20-381,101 #7f0e0079 app:id/tvHotspotP1}
+                        android.support.v7.widget.AppCompatEditText{42001028 VFED..CL ... 381,0-981,123 #7f0e007a app:id/etHotspotP1}
+                      android.widget.TableRow{42002f90 V.E..... ... 0,544-600,544}
+                      android.widget.TableRow{420032d8 V.E..... ... 0,544-600,544}
+                      android.widget.TableRow{42003620 V.E..... ... 0,544-600,660}
+                        android.support.v7.widget.AppCompatTextView{42003928 V.ED.... ... 0,20-381,101 #7f0e007b app:id/tvHotspotP2}
+                        android.support.v7.widget.AppCompatEditText{42003e20 VFED..CL ... 381,0-981,116 #7f0e007c app:id/etHotspotP2}
+                      android.widget.TableRow{42005b18 V.E..... ... 0,660-600,660}
+                      android.widget.TableRow{42005e60 V.E..... ... 0,660-600,660}
+                      android.widget.TableRow{42006250 V.E..... ... 0,660-600,660}
+                      android.widget.TableRow{42006598 V.E..... ... 0,660-600,660}
+                      android.widget.TableRow{420068e0 V.E..... ... 0,660-600,660}
+                      android.widget.TableRow{42006c28 V.E..... ... 0,660-600,660}
+                      android.widget.TableRow{42006f70 V.E..... ... 0,660-600,660}
+                      android.widget.TableRow{420072b8 V.E..... ... 0,660-600,660}
+                      android.widget.TableRow{42007600 V.E..... ... 0,660-600,660}
+                      android.widget.TableRow{42007948 V.E..... ... 0,660-600,660}
+                    android.widget.TableLayout{42007cd0 V.E..... ... 60,860-660,960}
+                      android.widget.TableRow{42008278 V.E..... ... 0,0-600,100}
+                        android.support.v7.widget.AppCompatButton{42008988 VFED..C. ... 0,0-300,100 #7f0e007d app:id/buttonConnect}
+                        android.support.v7.widget.AppCompatButton{4200a020 VFED..C. ... 300,0-600,100 #7f0e007e app:id/buttonDefault}
+                      android.widget.TableRow{4200a8b0 V.E..... ... 0,100-600,100}
+                  android.widget.ListView{4200af80 IFED.VC. ... -480,0-0,1134 #7f0e00b7 app:id/left_drawer}
+                    android.support.v7.widget.AppCompatTextView{420202f8 V.ED.... ... 0,0-480,96 #1020014 android:id/text1}
+                    android.support.v7.widget.AppCompatTextView{42021f98 V.ED.... ... 0,98-480,194 #1020014 android:id/text1}
+                    android.support.v7.widget.AppCompatTextView{42022998 V.ED.... ... 0,196-480,292 #1020014 android:id/text1}
+                    android.support.v7.widget.AppCompatTextView{42023398 V.ED.... ... 0,294-480,390 #1020014 android:id/text1}
+                    android.support.v7.widget.AppCompatTextView{42023d98 V.ED.... ... 0,392-480,488 #1020014 android:id/text1}

@@ -9,10 +9,10 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,12 +21,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.SocketException;
-import java.net.UnknownHostException;
 
 import services.HotspotService;
 
@@ -61,9 +56,7 @@ public class RemoteActivity extends AppCompatActivity implements SensorEventList
             // We've bound to LocalService, cast the IBinder and get LocalService instance
             HotspotService.LocalBinder binder = (HotspotService.LocalBinder) service;
             hotspotService = binder.getService();
-            // This Thread is necessary for a short break. You need the break to prevent that this activity
-            // starts a Receiving or Requesting while another activity is calling stopReceiving because onStart ans Onstop
-            // is always called new activity calls onStart then old calls OnStop
+
 
             mBound = true;
         }
@@ -104,7 +97,7 @@ public class RemoteActivity extends AppCompatActivity implements SensorEventList
                 } else onResume();
                 //Zähler zum umschalten
                 switchCount++;
-                showip= (TextView)findViewById(R.id.textView27);
+                showip= (TextView)findViewById(R.id.button_switch);
                 showip.setText(hotspotService.getTest());
 
             }

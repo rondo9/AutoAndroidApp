@@ -26,33 +26,33 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:id="@+id/spinner1"
-        android:layout_below="@+id/spinner2"
-        android:layout_alignLeft="@+id/spinner0"
-        android:layout_marginTop="10dp" />
+        android:layout_below="@+id/spinner0"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp" />
 
     <Spinner
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:id="@+id/spinner2"
-        android:layout_below="@+id/spinner3"
-        android:layout_alignLeft="@+id/spinner0"
-        android:layout_marginTop="10dp" />
+        android:layout_below="@+id/spinner1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp" />
 
     <Spinner
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:id="@+id/spinner3"
-        android:layout_below="@+id/spinner0"
-        android:layout_alignStart="@+id/spinner0"
-        android:layout_marginTop="10dp" />
+        android:layout_below="@+id/spinner2"
+        android:layout_alignStart="@+id/spinner2"
+        android:layout_marginTop="0dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="OK"
         android:id="@+id/commandButton"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/spinner1"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/spinner3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
 
 </RelativeLayout><!-- From: file:/D:/TUM/M3_WS15/Autonomous%20Driving/AutoAndroidApp/app/src/main/res/layout/content_command.xml -->

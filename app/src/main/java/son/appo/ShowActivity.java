@@ -1,13 +1,18 @@
 package son.appo;
 
+import android.animation.ArgbEvaluator;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,26 +29,43 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+
 import services.HotspotService;
-// Son du kannst jetzt die einzelen Sensoren mit getter Methoden holen
-//Das geht einfach durch hotspotService.getSensorBottomLeft(); für den Sensor unten Links
-// hotspoService.getCurrenInstruction funktioniert jetzt 0x00 = turn left, 0x01 = go straight, 0x02 = turn right, park = 0x03, stop = 0x04
-// aktuell bekommst du immer 2.5 für jeden Sensor aber wenn die App zu meiner VirtualCAr verbunden ist kommen andere Werte
+
 public class ShowActivity extends AppCompatActivity {
 
-    String[] strings = {"STRAIGHT","LEFT", "RIGHT", "STOP"};
+    String[] strings = {"STRAIGHT", "LEFT", "RIGHT", "STOP", "PARK"};
 
-    String[] subs = {"Go straight next", "Turn left next", "Turn right next", "Stop next"};
+    String[] subs = {"Go straight next", "Turn left next", "Turn right next", "Stop next", "Park vehicle"};
 
-    int arr_images[] = {R.drawable.straight_sign, R.drawable.left_sign, R.drawable.right_sign, R.drawable.stop_sign};
+    int arr_images[] = {R.drawable.straight_sign, R.drawable.left_sign, R.drawable.right_sign, R.drawable.stop_sign, R.drawable.park_sign};
 
-    //for the drawer
+    // For displaying sensor data with color varying from RED (near) to GREEN (far)
+    private final long refreshMiliSec = 500;
+    private final double MINDISTANCE = 0;
+    private final double MAXDISTANCE = 1.27;
+    private final int SAFECOLOR = Color.GREEN;
+    private final int NEARCOLOR = Color.RED;
+    private final int[] oval_diags = {R.drawable.oval_diag_0, R.drawable.oval_diag_1, R.drawable.oval_diag_2, R.drawable.oval_diag_3, R.drawable.oval_diag_4,
+            R.drawable.oval_diag_5, R.drawable.oval_diag_6, R.drawable.oval_diag_7, R.drawable.oval_diag_8, R.drawable.oval_diag_9};
+    private final int[] oval_vers = {R.drawable.oval_ver_0, R.drawable.oval_ver_1, R.drawable.oval_ver_2, R.drawable.oval_ver_3, R.drawable.oval_ver_4,
+            R.drawable.oval_ver_5, R.drawable.oval_ver_6, R.drawable.oval_ver_7, R.drawable.oval_ver_8, R.drawable.oval_ver_9};
+    private final int[] oval_hors = {R.drawable.oval_hor_0, R.drawable.oval_hor_1, R.drawable.oval_hor_2, R.drawable.oval_hor_3, R.drawable.oval_hor_4,
+            R.drawable.oval_hor_5, R.drawable.oval_hor_6, R.drawable.oval_hor_7, R.drawable.oval_hor_8, R.drawable.oval_hor_9};
+    private double[] sensors;
+    private TextView[] textViews;
+    private TextView[] areas; // background of textViews
+    private int[] saveColors;
+    private int savMinPos;
+    private Handler myRepeatHandler;
+
+    // For the drawer
     private String[] mPlanetTitles;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
 
-
-    // for the service
+    // For the service
     boolean mBound;
     HotspotService hotspotService;
     private ServiceConnection mConnection = new ServiceConnection() {
@@ -61,7 +83,7 @@ public class ShowActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     try {
-                        Thread.sleep(500);
+                        Thread.sleep(refreshMiliSec);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -74,6 +96,7 @@ public class ShowActivity extends AppCompatActivity {
             Log.i("ShowActivity", "OnServiceConnected");
 
         }
+
         @Override
         // Called when the connection with the service disconnects unexpectedly
         public void onServiceDisconnected(ComponentName arg0) {
@@ -81,6 +104,148 @@ public class ShowActivity extends AppCompatActivity {
         }
 
     };
+
+    // Initialize sensors
+    private void initStats() {
+        sensors = new double[8];
+        textViews = new TextView[8];
+        areas = new TextView[8];
+        saveColors = new int[8];
+        savMinPos = 0;
+        Random r = new Random();
+
+        for (int i = 0; i < sensors.length; i++) {
+            sensors[i] = MAXDISTANCE;
+            saveColors[i] = SAFECOLOR;
+        }
+
+        textViews[0] = ((TextView) findViewById(R.id.tvTopLeft));
+        textViews[1] = ((TextView) findViewById(R.id.tvTopMid));
+        textViews[2] = ((TextView) findViewById(R.id.tvTopRight));
+        textViews[3] = ((TextView) findViewById(R.id.tvMidLeft));
+        textViews[4] = ((TextView) findViewById(R.id.tvMidRight));
+        textViews[5] = ((TextView) findViewById(R.id.tvBotLeft));
+        textViews[6] = ((TextView) findViewById(R.id.tvBotMid));
+        textViews[7] = ((TextView) findViewById(R.id.tvBotRight));
+
+        areas[0] = ((TextView) findViewById(R.id.tvTopLeftBack));
+        areas[1] = ((TextView) findViewById(R.id.tvTopMidBack));
+        areas[2] = ((TextView) findViewById(R.id.tvTopRightBack));
+        areas[3] = ((TextView) findViewById(R.id.tvLeftBack));
+        areas[4] = ((TextView) findViewById(R.id.tvRightBack));
+        areas[5] = ((TextView) findViewById(R.id.tvBotLeftBack));
+        areas[6] = ((TextView) findViewById(R.id.tvBotMidBack));
+        areas[7] = ((TextView) findViewById(R.id.tvBotRightBack));
+
+        /*
+        // set transparency
+        areas[0].setAlpha((float) 0.5);
+        areas[2].setAlpha((float) 0.5);
+        areas[5].setAlpha((float) 0.5);
+        areas[7].setAlpha((float) 0.5);
+        */
+    }
+
+    // Update sensor data
+    private void updateInfos() {
+        if (mBound) {
+            sensors[0] = hotspotService.getSensorTopLeft();
+            sensors[1] = hotspotService.getSensorTopMiddle();
+            sensors[2] = hotspotService.getSensorTopRight();
+            sensors[3] = hotspotService.getSensorMiddleLeft();
+            sensors[4] = hotspotService.getSensorMiddleRight();
+            sensors[5] = hotspotService.getSensorBottomLeft();
+            sensors[6] = hotspotService.getSensorBottomMiddle();
+            sensors[7] = hotspotService.getSensorBottomRight();
+        }
+
+        // Array oval_diags (for sensor top left, top right, bot left, bot right) contains 10 levels of colors varying from GREEN (index 0) to RED (index 9)
+        // Array oval_vers (for sensor top mid, bot mid) contains 10 levels of colors varying from GREEN (index 0) to RED (index 9)
+        // Array oval_hors (for sensor left mid, right mid) contains 10 levels of colors varying from GREEN (index 0) to RED (index 9)
+        areas[0].setBackgroundResource(oval_diags[(int) (9.99 * (1.0 - (sensors[0] - MINDISTANCE) / (MAXDISTANCE - MINDISTANCE)))]);
+        areas[1].setBackgroundResource(oval_vers[(int) (9.99 * (1.0 - (sensors[1] - MINDISTANCE) / (MAXDISTANCE - MINDISTANCE)))]);
+        areas[2].setBackgroundResource(oval_diags[(int) (9.99 * (1.0 - (sensors[2] - MINDISTANCE) / (MAXDISTANCE - MINDISTANCE)))]);
+        areas[3].setBackgroundResource(oval_hors[(int) (9.99 * (1.0 - (sensors[3] - MINDISTANCE) / (MAXDISTANCE - MINDISTANCE)))]);
+        areas[4].setBackgroundResource(oval_hors[(int) (9.99 * (1.0 - (sensors[4] - MINDISTANCE) / (MAXDISTANCE - MINDISTANCE)))]);
+        areas[5].setBackgroundResource(oval_diags[(int) (9.99 * (1.0 - (sensors[5] - MINDISTANCE) / (MAXDISTANCE - MINDISTANCE)))]);
+        areas[6].setBackgroundResource(oval_vers[(int) (9.99 * (1.0 - (sensors[6] - MINDISTANCE) / (MAXDISTANCE - MINDISTANCE)))]);
+        areas[7].setBackgroundResource(oval_diags[(int) (9.99 * (1.0 - (sensors[7] - MINDISTANCE) / (MAXDISTANCE - MINDISTANCE)))]);
+
+        double minD = sensors[0]; // find minimum distance to underline
+        savMinPos = 0;
+        for (int i = 0; i < sensors.length; i++) {
+            textViews[i].setText(Math.round(sensors[i] * 100) / 100. + ""); // rounding to 2 comma-digits eg. 1.27
+            if (sensors[i] < minD) {
+                minD = sensors[i];
+                savMinPos = i;
+            }
+            /*
+            int newColor = getScalingColor(Double.parseDouble((textViews[i]).getText() + "")); // normalized color between GREEN and RED
+            // Used to fade color smoothly between old and new color
+            ObjectAnimator colorFade = ObjectAnimator.ofObject(
+                    textViews[i], "backgroundColor",
+                    new ArgbEvaluator(),
+                    saveColors[i],
+                    newColor);
+            colorFade.setDuration(refreshMiliSec);
+            colorFade.start();
+            textViews[i].setBackgroundColor(newColor);
+            saveColors[i] = newColor;
+            */
+        }
+
+
+        // Underline the currently minimum distance
+        SpannableString content = new SpannableString(Math.round(sensors[savMinPos] * 100) / 100. + "");
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        textViews[savMinPos].setText(content);
+
+        /* Show current command
+        0x00 = turn left
+        0x01 = go straight
+        0x02 = turn right
+        0x03 = park
+        0x04 = stop
+        strings = {"STRAIGHT", "LEFT", "RIGHT", "STOP", "PARK"};
+        */
+        if (mBound) {
+            Spinner sp = (Spinner) findViewById(R.id.spinner);
+            switch (hotspotService.getCurrentInstruction()) {
+                case 0x00:
+                    sp.setSelection(1);
+                    break;
+                case 0x01:
+                    sp.setSelection(0);
+                    break;
+                case 0x02:
+                    sp.setSelection(2);
+                    break;
+                case 0x03:
+                    sp.setSelection(4);
+                    break;
+                case 0x04:
+                    sp.setSelection(3);
+                    break;
+            }
+        }
+    }
+
+    // Normalize color to two ends : GREEN (far) and RED (near)
+    private int getScalingColor(double value) {
+        /*
+        eg:
+        value     color
+        MIN         RED = -65536 (0xffff0000)
+        MAX         GREEN = -16711936 (0xff00ff00)
+
+
+        --> color = (value-MIN)*(GREEN-RED)/(MAX-MIN) + RED
+        */
+
+        //return (int) ((value - MINDISTANCE) * (Color.GREEN - Color.RED) / (MAXDISTANCE - MINDISTANCE) + Color.RED);
+
+        return (int) (new ArgbEvaluator()).evaluate((float) ((value - MINDISTANCE) / (MAXDISTANCE - MINDISTANCE)), NEARCOLOR, SAFECOLOR);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,8 +266,6 @@ public class ShowActivity extends AppCompatActivity {
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
         //finished with drawer stuff
 
-
-
         //findViewById(R.id.tvMid).setBackgroundResource(R.drawable.auto_img);
 
         Spinner mySpinner = (Spinner) findViewById(R.id.spinner);
@@ -118,7 +281,32 @@ public class ShowActivity extends AppCompatActivity {
                 ShowActivity.this.startActivity(myIntent);
             }
         });
+
+        // Update sensor data
+        myRepeatHandler = new Handler();
+        initStats();
+        startRepeatRandom();
     }
+
+    // These following 3 functions repeat/stop the process of updating sensors
+    Runnable myStatus = new Runnable() {
+        @Override
+        public void run() {
+            updateInfos();
+            //new MyAsyncTask().execute();
+            myRepeatHandler.postDelayed(myStatus, refreshMiliSec);
+        }
+    };
+
+    void startRepeatRandom() {
+        myStatus.run();
+    }
+
+    void stopRepeatingTask() {
+        myRepeatHandler.removeCallbacks(myStatus);
+    }
+    // end of repeating functions
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -126,21 +314,21 @@ public class ShowActivity extends AppCompatActivity {
         // binding the Service to the activity
         Intent intent = new Intent(this, HotspotService.class);
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-        if(mBound){
+        if (mBound) {
             // start the to receive and request data form the car
             hotspotService.startRequest();
             hotspotService.startReceive();
             Log.i("ShowActivity", "bindService");
-        }
-        else{
+        } else {
 
         }
     }
+
     @Override
     protected void onResume() {
         super.onResume();
         Log.i("ShowActivity", "onResume is called");
-        if(mBound){
+        if (mBound) {
             // start the to receive and request data form the car
             hotspotService.startRequest();
             hotspotService.startReceive();
@@ -191,14 +379,14 @@ public class ShowActivity extends AppCompatActivity {
         return true;
     }
 
-    public class MyAdapter extends ArrayAdapter<String>{
+    public class MyAdapter extends ArrayAdapter<String> {
 
-        public MyAdapter(Context context, int textViewResourceId,   String[] objects) {
+        public MyAdapter(Context context, int textViewResourceId, String[] objects) {
             super(context, textViewResourceId, objects);
         }
 
         @Override
-        public View getDropDownView(int position, View convertView,ViewGroup parent) {
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
             return getCustomDropDownView(position, convertView, parent);
         }
 
@@ -209,15 +397,15 @@ public class ShowActivity extends AppCompatActivity {
 
         public View getCustomView(int position, View convertView, ViewGroup parent) {
 
-            LayoutInflater inflater=getLayoutInflater();
-            View row=inflater.inflate(R.layout.row, parent, false);
+            LayoutInflater inflater = getLayoutInflater();
+            View row = inflater.inflate(R.layout.row, parent, false);
             //TextView label=(TextView)row.findViewById(R.id.company);
             //label.setText(strings[position]);
 
             //TextView sub=(TextView)row.findViewById(R.id.sub);
             //sub.setText(subs[position]);
 
-            ImageView icon=(ImageView)row.findViewById(R.id.image);
+            ImageView icon = (ImageView) row.findViewById(R.id.image);
             icon.setImageResource(arr_images[position]);
 
             return row;
@@ -225,15 +413,15 @@ public class ShowActivity extends AppCompatActivity {
 
         public View getCustomDropDownView(int position, View convertView, ViewGroup parent) {
 
-            LayoutInflater inflater=getLayoutInflater();
-            View row=inflater.inflate(R.layout.row, parent, false);
-            TextView label=(TextView)row.findViewById(R.id.direction);
+            LayoutInflater inflater = getLayoutInflater();
+            View row = inflater.inflate(R.layout.row, parent, false);
+            TextView label = (TextView) row.findViewById(R.id.direction);
             label.setText(strings[position]);
 
-            TextView sub=(TextView)row.findViewById(R.id.sub);
+            TextView sub = (TextView) row.findViewById(R.id.sub);
             sub.setText(subs[position]);
 
-            ImageView icon=(ImageView)row.findViewById(R.id.image);
+            ImageView icon = (ImageView) row.findViewById(R.id.image);
             icon.setImageResource(arr_images[position]);
 
             return row;
@@ -249,23 +437,29 @@ public class ShowActivity extends AppCompatActivity {
             selectItem(position);
         }
     }
+
     private void selectItem(int position) {
         //what happens when item is selected
-        if(position==0){
-            Intent myIntent= new Intent(this, ConnectActivity.class);
-            startActivity(myIntent);}
-        if(position==1){
-            Intent myIntent= new Intent(this, ShowActivity.class);
-            startActivity(myIntent);}
-        if(position==2){
-            Intent myIntent= new Intent(this, DiagnosisActivity.class);
-            startActivity(myIntent);}
-        if(position==3){
-            Intent myIntent= new Intent(this, RemoteActivity.class);
-            startActivity(myIntent);}
-        if(position==4){
-            Intent myIntent= new Intent(this, CommandActivity.class);
-            startActivity(myIntent);}
+        if (position == 0) {
+            Intent myIntent = new Intent(this, ConnectActivity.class);
+            startActivity(myIntent);
+        }
+        if (position == 1) {
+            Intent myIntent = new Intent(this, ShowActivity.class);
+            startActivity(myIntent);
+        }
+        if (position == 2) {
+            Intent myIntent = new Intent(this, DiagnosisActivity.class);
+            startActivity(myIntent);
+        }
+        if (position == 3) {
+            Intent myIntent = new Intent(this, RemoteActivity.class);
+            startActivity(myIntent);
+        }
+        if (position == 4) {
+            Intent myIntent = new Intent(this, CommandActivity.class);
+            startActivity(myIntent);
+        }
 
         // update selected item and title, then close the drawer
         mDrawerList.setItemChecked(position, true);

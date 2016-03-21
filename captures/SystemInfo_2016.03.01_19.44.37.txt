@@ -1,0 +1,99 @@
+Applications Graphics Acceleration Info:
+Uptime: 37582612 Realtime: 174903535
+
+** Graphics info for pid 17582 [son.appo] **
+
+Recent DisplayList operations
+        DrawPatch
+      DrawDisplayList
+      DrawPatch
+  RestoreToCount
+DrawRect
+DrawRect
+DrawRect
+multiDraw
+  DrawText
+DrawRect
+DrawDisplayList
+  Save
+  ClipRect
+  DrawDisplayList
+    DrawDisplayList
+      DrawDisplayList
+        DrawDisplayList
+          Save
+          ClipRect
+          DrawDisplayList
+          RestoreToCount
+          Save
+          ClipRect
+          DrawDisplayList
+            DrawDisplayList
+              DrawRect
+              Save
+              ClipRect
+              Translate
+              DrawText
+              RestoreToCount
+            DrawDisplayList
+            DrawDisplayList
+              DrawRect
+              Save
+              ClipRect
+              Translate
+              DrawText
+              RestoreToCount
+            DrawDisplayList
+          RestoreToCount
+        DrawPatch
+      DrawDisplayList
+      DrawPatch
+  RestoreToCount
+DrawRect
+DrawRect
+DrawRect
+multiDraw
+  DrawText
+
+Caches:
+Current memory usage / total memory usage (bytes):
+  TextureCache         17323224 / 25165824
+  LayerCache                  0 / 16777216
+  RenderBufferCache           0 /  2097152
+  GradientCache               0 /   524288
+  PathCache                   0 / 10485760
+  TextDropShadowCache         0 /  2097152
+  PatchCache               1728 /   131072
+  FontRenderer 0 A8      524288 /   524288
+  FontRenderer 0 RGBA         0 /        0
+  FontRenderer 0 total   524288 /   524288
+Other:
+  FboCache                    0 /       16
+Total memory usage:
+  17849240 bytes, 17.02 MB
+
+Profile data in ms:
+
+	son.appo/son.appo.ConnectActivity/android.view.ViewRootImpl@42010e88
+	son.appo/son.appo.CommandActivity/android.view.ViewRootImpl@4205b9e8
+	son.appo/son.appo.ShowActivity/android.view.ViewRootImpl@41fc6508
+	son.appo/son.appo.RemoteActivity/android.view.ViewRootImpl@4202d888
+View hierarchy:
+
+  son.appo/son.appo.ConnectActivity/android.view.ViewRootImpl@42010e88
+  64 views, 0,00 kB of display lists, 29 frames rendered
+
+  son.appo/son.appo.CommandActivity/android.view.ViewRootImpl@4205b9e8
+  37 views, 0,00 kB of display lists, 4 frames rendered
+
+  son.appo/son.appo.ShowActivity/android.view.ViewRootImpl@41fc6508
+  48 views, 0,00 kB of display lists, 74 frames rendered
+
+  son.appo/son.appo.RemoteActivity/android.view.ViewRootImpl@4202d888
+  24 views, 2,16 kB of display lists, 80 frames rendered
+
+
+Total ViewRootImpl: 4
+Total Views:        173
+Total DisplayList:  2,16 kB
+
