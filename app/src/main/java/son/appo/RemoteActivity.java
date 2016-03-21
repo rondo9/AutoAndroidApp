@@ -56,9 +56,7 @@ public class RemoteActivity extends AppCompatActivity implements SensorEventList
             // We've bound to LocalService, cast the IBinder and get LocalService instance
             HotspotService.LocalBinder binder = (HotspotService.LocalBinder) service;
             hotspotService = binder.getService();
-            // This Thread is necessary for a short break. You need the break to prevent that this activity
-            // starts a Receiving or Requesting while another activity is calling stopReceiving because onStart ans Onstop
-            // is always called new activity calls onStart then old calls OnStop
+
 
             mBound = true;
         }

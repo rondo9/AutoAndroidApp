@@ -90,6 +90,7 @@ public class CommandActivity extends AppCompatActivity {
                 if (instructions == null) {
                     Toast.makeText(getApplication().getBaseContext(), "Please select commands", Toast.LENGTH_SHORT).show();
                 } else {
+                    if(mBound)
                     hotspotService.sendInstructions(instructions);
 
                     Intent myIntent = new Intent(CommandActivity.this, ShowActivity.class);

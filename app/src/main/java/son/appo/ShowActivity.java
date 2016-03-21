@@ -124,6 +124,7 @@ public class ShowActivity extends AppCompatActivity {
 
     // Update sensor data
     private void updateInfos() {
+        if(mBound){
         sensors[0] = hotspotService.getSensorTopLeft();
         sensors[1] = hotspotService.getSensorTopMiddle();
         sensors[2] = hotspotService.getSensorTopRight();
@@ -131,7 +132,7 @@ public class ShowActivity extends AppCompatActivity {
         sensors[4] = hotspotService.getSensorMiddleRight();
         sensors[5] = hotspotService.getSensorBottomLeft();
         sensors[6] = hotspotService.getSensorBottomMiddle();
-        sensors[7] = hotspotService.getSensorBottomRight();
+        sensors[7] = hotspotService.getSensorBottomRight();}
 
         for (int i = 0; i < sensors.length; i++) {
             textViews[i].setText(Math.round(sensors[i] * 100) / 100. + ""); // rounding to 2 comma-digits eg. 1.27

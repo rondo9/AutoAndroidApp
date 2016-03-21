@@ -105,6 +105,7 @@ public class DiagnosisActivity extends AppCompatActivity {
 
     // Update function for sensors, this will be called repeatedly EVERY 1000ms
     private void updateSensors(){
+        if(mBound){
         TextView valTopLeft = (TextView) findViewById(R.id.valTopLeft);
         valTopLeft.setText(hotspotService.getSensorTopLeft() + "");
         TextView valTopMid = (TextView) findViewById(R.id.valTopMid);
@@ -120,7 +121,7 @@ public class DiagnosisActivity extends AppCompatActivity {
         TextView valBotMid = (TextView) findViewById(R.id.valBotMid);
         valBotMid.setText(hotspotService.getSensorBottomMiddle() + "");
         TextView valBotRight = (TextView) findViewById(R.id.valBotRight);
-        valBotRight.setText(hotspotService.getSensorBottomRight() + "");
+        valBotRight.setText(hotspotService.getSensorBottomRight() + "");}
     }
 
     // These following 3 functions repeat/stop the process of updating sensors

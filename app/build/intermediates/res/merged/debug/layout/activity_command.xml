@@ -16,4 +16,4 @@
     <include layout="@layout/content_command"/>
 <include layout="@layout/drawer"/>
 </android.support.v4.widget.DrawerLayout>
-<!-- From: file:/D:/TUM/M3_WS15/Autonomous%20Driving/AutoAndroidApp/app/src/main/res/layout/activity_command.xml -->
+<!-- From: file:/Users/philipp/AndroidStudioProjects/AppO/app/src/main/res/layout/activity_command.xml -->

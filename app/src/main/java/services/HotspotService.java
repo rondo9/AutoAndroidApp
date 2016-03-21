@@ -40,7 +40,7 @@ public class HotspotService extends Service {
 
     // Data for the acitivites
     private byte currentInstruction =0x01;
-    private double[] currentSensors = new double []{2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5};
+    private double[] currentSensors = new double []{1.27,1.27,1.27,1.27,1.27,1.27,1.27,1.27};
     //Data for the service itself
     private boolean hotspotStarted = false;
     private boolean ipSet;
@@ -75,28 +75,83 @@ public class HotspotService extends Service {
                 +currentSensors[2]+currentSensors[3]+currentSensors[4]+currentSensors[5]+currentSensors[6]+currentSensors[7];
     }
     public double getSensorTopLeft(){
-        return currentSensors[0];
+        try {
+            sem_sensor.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        double sen = currentSensors[0];
+        sem_sensor.release();
+        return sen;
     }
     public double getSensorTopMiddle(){
-        return currentSensors[1];
+        try {
+            sem_sensor.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        double sen = currentSensors[1];
+        sem_sensor.release();
+        return sen;
     }
     public double getSensorTopRight(){
-        return currentSensors[2];
+        try {
+            sem_sensor.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        double sen = currentSensors[2];
+        sem_sensor.release();
+        return sen;
     }
     public double getSensorMiddleRight(){
-        return currentSensors[3];
+        try {
+            sem_sensor.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        double sen = currentSensors[3];
+        sem_sensor.release();
+        return sen;
     }
     public double getSensorBottomRight(){
-        return currentSensors[4];
+        try {
+            sem_sensor.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        double sen = currentSensors[4];
+        sem_sensor.release();
+        return sen;
     }
     public double getSensorBottomMiddle(){
-        return currentSensors[5];
+        try {
+            sem_sensor.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        double sen = currentSensors[5];
+        sem_sensor.release();
+        return sen;
     }
-    public double getSensorBottomLeft(){
-        return currentSensors[6];
+    public double getSensorBottomLeft(){ try {
+        sem_sensor.acquire();
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+        double sen = currentSensors[6];
+        sem_sensor.release();
+        return sen;
     }
     public double getSensorMiddleLeft(){
-        return currentSensors[7];
+        try {
+            sem_sensor.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        double sen = currentSensors[7];
+        sem_sensor.release();
+        return sen;
     }
 
 
@@ -314,7 +369,7 @@ public class HotspotService extends Service {
                         }
                     });
                     // start taking the timme
-                    checkTime.start();
+                    //checkTime.start();
                     receiver.receive(packet);
                     // if the programm reached this point. It received a message! Thats why you can stop checkTime now.
                     checkTime.interrupt();
@@ -356,7 +411,13 @@ public class HotspotService extends Service {
         public void receivedSensor(byte []sensors){
 
             for(int i =0;i<=7;i++){
+                try {
+                    sem_sensor.acquire();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 currentSensors[i]=(double) sensors[i]/100;
+                sem_sensor.release();
             }
         }
         public void receivedCurrentInstruction(byte instruction){

@@ -2139,8 +2139,8 @@ containing a value of this type.
         public static final int text_margin=0x7f09006c;
     }
     public static final class drawable {
-        public static final int Hotpink=0x7f020058;
-        public static final int PowderBlue=0x7f020059;
+        public static final int Hotpink=0x7f020059;
+        public static final int PowderBlue=0x7f02005a;
         public static final int abc_ab_share_pack_mtrl_alpha=0x7f020000;
         public static final int abc_action_bar_item_background_material=0x7f020001;
         public static final int abc_btn_borderless_material=0x7f020002;
@@ -2211,36 +2211,37 @@ containing a value of this type.
         public static final int abc_textfield_search_default_mtrl_alpha=0x7f020043;
         public static final int abc_textfield_search_material=0x7f020044;
         public static final int auto_img=0x7f020045;
-        public static final int bkg=0x7f02005a;
-        public static final int black=0x7f02005b;
-        public static final int brown=0x7f02005c;
+        public static final int bkg=0x7f02005b;
+        public static final int black=0x7f02005c;
+        public static final int brown=0x7f02005d;
         public static final int circle=0x7f020046;
         public static final int circle_button=0x7f020047;
-        public static final int darkgrey=0x7f02005d;
+        public static final int darkgrey=0x7f02005e;
         public static final int design_fab_background=0x7f020048;
         public static final int design_snackbar_background=0x7f020049;
-        public static final int green=0x7f02005e;
-        public static final int grey=0x7f02005f;
+        public static final int green=0x7f02005f;
+        public static final int grey=0x7f020060;
         public static final int ic_info_black_24dp=0x7f02004a;
         public static final int ic_notifications_black_24dp=0x7f02004b;
         public static final int ic_sync_black_24dp=0x7f02004c;
         public static final int info=0x7f02004d;
         public static final int left_sign=0x7f02004e;
-        public static final int notification_template_icon_bg=0x7f020060;
+        public static final int notification_template_icon_bg=0x7f020061;
         public static final int oval_diag=0x7f02004f;
         public static final int oval_hor=0x7f020050;
         public static final int oval_ver=0x7f020051;
-        public static final int pink=0x7f020061;
-        public static final int rect=0x7f020052;
-        public static final int rect_mid=0x7f020053;
-        public static final int red=0x7f020062;
-        public static final int right_sign=0x7f020054;
-        public static final int rot_oval_upmid=0x7f020055;
-        public static final int stop_sign=0x7f020056;
-        public static final int straight_sign=0x7f020057;
-        public static final int violet=0x7f020063;
-        public static final int white=0x7f020064;
-        public static final int yellow=0x7f020065;
+        public static final int park_sign=0x7f020052;
+        public static final int pink=0x7f020062;
+        public static final int rect=0x7f020053;
+        public static final int rect_mid=0x7f020054;
+        public static final int red=0x7f020063;
+        public static final int right_sign=0x7f020055;
+        public static final int rot_oval_upmid=0x7f020056;
+        public static final int stop_sign=0x7f020057;
+        public static final int straight_sign=0x7f020058;
+        public static final int violet=0x7f020064;
+        public static final int white=0x7f020065;
+        public static final int yellow=0x7f020066;
     }
     public static final class id {
         public static final int action0=0x7f0e00b0;
