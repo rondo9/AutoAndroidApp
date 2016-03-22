@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -34,6 +35,48 @@ import java.util.Random;
 import services.HotspotService;
 
 public class ShowActivity extends AppCompatActivity {
+
+
+    private byte[][] picture = new byte[60][80];
+
+    private void randomPicture() {
+        Random rand = new Random();
+
+        for (int i = 0; i < 60; i++) {
+            for (int j = 0; j < 80; j++) {
+                picture[i][j] = (byte) rand.nextInt(127);
+            }
+        }
+    }
+
+    private void makeBitmap() {
+        for (int i = 0; i < 60; i++) {
+            for (int m = 0; m < 8; m++) {
+                for (int j = 0; j < 80; j++) {
+                    for (int k = 0; k < 8; k++) {
+                        if (bytetoBit(picture[i][j], k)) {
+                            buffer.setPixel(8 * j + k, 8 * i + m, Color.WHITE);
+                        } else {
+                            buffer.setPixel(8 * j + k, 8 * i + m, Color.BLACK);
+                        }
+                        ;
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean bytetoBit(byte data, int pos) {
+        int mask = 1 << pos;
+
+        return (data & mask) == mask;
+    }
+
+
+    private int rand;
+    private ImageView video;
+    Bitmap bm;
+    Bitmap buffer = Bitmap.createBitmap(640, 480, Bitmap.Config.ARGB_8888);
 
     String[] strings = {"STRAIGHT", "LEFT", "RIGHT", "STOP", "PARK"};
 
@@ -286,6 +329,59 @@ public class ShowActivity extends AppCompatActivity {
         myRepeatHandler = new Handler();
         initStats();
         startRepeatRandom();
+
+
+        bm = Bitmap.createBitmap(640, 480, Bitmap.Config.ARGB_8888);
+        //bm.eraseColor(Color.BLUE);
+        video = (ImageView) findViewById(R.id.videoView);
+        video.setImageBitmap(buffer);
+
+        //thread for periodically updating the video player:
+
+        final Handler handler = new Handler();
+        Thread videoplayer = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(1);
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                video.setImageBitmap(buffer);
+                            }
+                        }, 400);
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+
+        Thread videoupdater = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(0);
+                        randomPicture();
+                        makeBitmap();
+                        //bm=buffer;
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+
+        videoupdater.start();
+
+        //videoplayer.start();
+        //makebmBlack();
+
     }
 
     // These following 3 functions repeat/stop the process of updating sensors
@@ -465,5 +561,19 @@ public class ShowActivity extends AppCompatActivity {
         mDrawerList.setItemChecked(position, true);
         setTitle(mPlanetTitles[position]);
         mDrawerLayout.closeDrawer(mDrawerList);
+    }
+
+
+    //für Testzwecke, ob setPixel alle Pixel erreicht
+    private void makebmBlack() {
+        for (int i = 0; i < 60; i++) {
+            for (int m = 0; m < 8; m++) {
+                for (int j = 0; j < 80; j++) {
+                    for (int k = 0; k < 8; k++) {
+                        bm.setPixel(8 * j + k, 8 * i + m, Color.BLUE);
+                    }
+                }
+            }
+        }
     }
 }

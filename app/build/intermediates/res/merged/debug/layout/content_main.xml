@@ -244,7 +244,7 @@
 
         </FrameLayout>
 
-        <VideoView
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="288dp"
             android:id="@+id/videoView"
@@ -253,4 +253,4 @@
     </GridLayout>
 
 
-</RelativeLayout><!-- From: file:/D:/TUM/M3_WS15/Autonomous%20Driving/AutoAndroidApp/app/src/main/res/layout/content_main.xml -->
+</RelativeLayout><!-- From: file:/D:/Documents/GitHub/AutoAndroidApp/app/src/main/res/layout/content_main.xml -->

@@ -43,6 +43,8 @@ public class RemoteActivity extends AppCompatActivity implements SensorEventList
     private int port = 33334;
     private InetAddress ip;
 
+    private Boolean SensorsOn;
+
 
     private TextView showip;
     // for the service
@@ -94,7 +96,10 @@ public class RemoteActivity extends AppCompatActivity implements SensorEventList
             public void onClick(View v) {
                 if (switchCount % 2 == 0) {
                     onPause();
+                    SensorsOn=false;
+
                 } else onResume();
+                SensorsOn=true;
                 //Zähler zum umschalten
                 switchCount++;
                 showip= (TextView)findViewById(R.id.button_switch);
